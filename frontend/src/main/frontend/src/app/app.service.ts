@@ -12,17 +12,11 @@ export class AppService {
   authenticate(credentials, callback) {
 
     const headers = new HttpHeaders(credentials ? {
-      authorization : 'Basic ' + btoa(credentials.username + ':' + credentials.password)
+      authorization : 'Basic ' + btoa(credentials.username + ':' + credentials.password),
+      'X-Requested-With': 'XMLHttpRequest'
     } : {});
 
-    this.http.get('api/users', {headers: headers}).subscribe(response => {
-      if (response['name']) {
-        this.authenticated = true;
-      } else {
-        this.authenticated = false;
-      }
-      return callback && callback();
-    });
+    this.http.get('/home', {headers: headers}).catch(e => this.handleError(e));
 
   }
 

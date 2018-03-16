@@ -16,6 +16,8 @@ export class LoginComponent {
   login() {
     this.app.authenticate(this.credentials, () => {
       this.router.navigateByUrl('/');
+    }, error => {
+      this.error = "Bad credentials"; // or extract smth from <error> object
     });
     return false;
   }
