@@ -1,0 +1,6 @@
+BEGIN TRANSACTION;
+
+  INSERT INTO "users" VALUES (1,'admin', '$2a$11$yXaOm55cC/hmFLDxSJC00e36Eq2mG6LNBCH6nbx.NOoTKkLUJ0iIW','admin@admin.ad', TRUE, TRUE, TRUE, TRUE);
+  INSERT INTO "user_and_profile" VALUES (1, 1), (1, 2);
+
+END TRANSACTION;
