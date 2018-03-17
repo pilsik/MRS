@@ -1,10 +1,12 @@
-  import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+
 
 @Injectable()
 export class UrlPermission implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem('currentUser')) {
@@ -13,7 +15,7 @@ export class UrlPermission implements CanActivate {
     }
 
     // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
     return false;
   }
 }

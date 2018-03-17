@@ -29,4 +29,5 @@ import {UrlPermission} from "./urlPermission/url.permission";
   providers: [AuthService,AccountService,UrlPermission],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

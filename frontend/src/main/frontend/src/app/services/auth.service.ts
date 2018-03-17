@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {User} from "../model/model.user";
 import "rxjs/add/operator/map";
+import {AppComponent} from "../app.component";
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
     let options = new RequestOptions();
     options.headers = headers;
     console.log('send get /api/account/login');
-    return this.http.get("/api/account/login", options)
+    return this.http.get(AppComponent.API_URL+"/api/account/login", options)
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         let user = response.text();// the returned user object is a principal object
@@ -34,6 +35,6 @@ export class AuthService {
   logOut() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    return this.http.post("/api/account/logout", {});
+    return this.http.post(AppComponent.API_URL+"/api/account/logout", {});
   }
 }

@@ -43,9 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+        super.configure(web);
     }
 
     @Override
@@ -54,14 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // starts authorizing configurations
                 .authorizeRequests()
                 // ignoring the guest's urls "
-                .antMatchers("/*", "/api/account/**").permitAll()
+                .antMatchers("/api/account/register","/api/account/login","/logout").permitAll()
                 // authenticate all remaining URLS
                 .anyRequest().fullyAuthenticated().and()
       /* "/logout" will log the user out by invalidating the HTTP Session,
        * cleaning up any {link rememberMe()} authentication that was configured, */
                 .logout()
                 .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/account/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                 .and()
                 // enabling the basic authentication
                 .httpBasic().and()
@@ -69,20 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
                 // disabling the CSRF - Cross Site Request Forgery
                 .csrf().disable();
-       /* http
-                .authorizeRequests()
-                .antMatchers("/index.html", "/", "/home", "/login")
-                .permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/api/**")
-                .authenticated()
-                .and()
-                .httpBasic()
-                .and().csrf().disable();
-                *//*.formLogin()
-                .and()*//**//**//**//*
-                ;*/
     }
 
     @Bean

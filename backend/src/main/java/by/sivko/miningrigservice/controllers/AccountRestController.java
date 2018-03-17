@@ -31,7 +31,7 @@ public class AccountRestController {
 
     @CrossOrigin
     @RequestMapping(value = "/account/register", method = RequestMethod.POST)
-    public ResponseEntity<String> createUser(@RequestBody @Valid UserDto userDto) {
+    public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
         User user = new User(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
         User userExistsLogin = this.userService.findUserByUsername(user.getUsername());
         if (userExistsLogin != null) {
@@ -42,6 +42,6 @@ public class AccountRestController {
             throw new AlreadyExistsException("A user with this email already exists");
         }
         this.userService.saveUser(user);
-        return new ResponseEntity<>("User has been registered successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 }
