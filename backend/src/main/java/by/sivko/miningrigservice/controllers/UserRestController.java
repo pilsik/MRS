@@ -6,13 +6,13 @@ import by.sivko.miningrigservice.controllers.exceptions.PasswordException;
 import by.sivko.miningrigservice.dto.UserDto;
 import by.sivko.miningrigservice.models.user.User;
 import by.sivko.miningrigservice.services.user.UserService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -22,9 +22,17 @@ import java.util.List;
 @RequestMapping(value = "/api")
 public class UserRestController {
 
+    public static final Logger logger = LoggerFactory.getLogger(UserRestController.class);
+
     private static final int MIN_PASSWORD_LENGTH = 5;
 
     private UserService userService;
+
+    @CrossOrigin
+    @RequestMapping("/account/login")
+    public String user(Principal principal) {
+        return principal.getName();
+    }
 
     @Autowired
     public UserRestController(UserService userService) {

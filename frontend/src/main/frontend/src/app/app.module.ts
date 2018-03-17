@@ -1,32 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home.component';
-import { LoginComponent } from './login.component';
-import { AppService } from './app.service';
 
-const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login'},
-  { path: 'home', component: HomeComponent},
-  { path: 'login', component: LoginComponent}
-];
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from "./services/auth.service";
+import {HttpModule} from "@angular/http";
+import {AccountService} from "./services/account.service";
+import { ProfileComponent } from './components/profile/profile.component';
+import {routing} from "./app.routing";
+import {FacebookModule} from "ngx-facebook";
+import {UrlPermission} from "./urlPermission/url.permission";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+
+
   ],
   imports: [
-    RouterModule.forRoot(routes),
-    BrowserModule,
-    HttpClientModule,
-    FormsModule
+    BrowserModule,HttpModule,FormsModule,routing, FacebookModule.forRoot(),
   ],
-  providers: [AppService],
+  providers: [AuthService,AccountService,UrlPermission],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
