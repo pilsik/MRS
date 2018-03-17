@@ -43,34 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        super.configure(web);
-      /*  web
+        web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");*/
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
-
-   /* @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/admin*/
-
-    /**
-     * ").hasAuthority("ADMIN")
-     * .anyRequest().authenticated()
-     * .and().csrf().disable().formLogin()
-     * .loginPage("/login").failureUrl("/login?error=true")
-     * .defaultSuccessUrl("/rigs")
-     * .usernameParameter("login")
-     * .passwordParameter("password")
-     * .and().logout()
-     * .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-     * .logoutSuccessUrl("/").and().exceptionHandling()
-     * .accessDeniedPage("/access-denied");
-     * }
-     */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -78,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // starts authorizing configurations
                 .authorizeRequests()
                 // ignoring the guest's urls "
-                .antMatchers("/api/account/register","/api/account/login","/api/account/logout").permitAll()
+                .antMatchers("/*", "/api/account/**").permitAll()
                 // authenticate all remaining URLS
                 .anyRequest().fullyAuthenticated().and()
       /* "/logout" will log the user out by invalidating the HTTP Session,
@@ -129,7 +105,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-
             }
         };
     }

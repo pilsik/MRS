@@ -14,7 +14,6 @@ import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 
-
 @NgModule({
   declarations: [
     AppComponent,

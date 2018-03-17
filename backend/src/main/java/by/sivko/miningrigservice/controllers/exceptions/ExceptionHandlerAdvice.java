@@ -2,6 +2,7 @@ package by.sivko.miningrigservice.controllers.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +25,7 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(value = {AlreadyExistsException.class, NotExistException.class, PasswordException.class})
+    @ExceptionHandler(value = {AlreadyExistsException.class, NotExistException.class, PasswordException.class, UsernameNotFoundException.class})
     @ResponseBody
     public ResponseEntity<ExceptionResponse> handle(RuntimeException exception) {
         ExceptionResponse response = new ExceptionResponse();

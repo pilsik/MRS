@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None
 })
 export class RegisterComponent implements OnInit {
+
   user: User = new User();
   errorMessage: string;
 
@@ -23,8 +24,7 @@ export class RegisterComponent implements OnInit {
     this.accountService.createAccount(this.user).subscribe(data => {
         this.router.navigate(['/login']);
       }, err => {
-        console.log(err);
-        this.errorMessage = "username already exist";
+        this.errorMessage = err.json().errorMessage;
       }
     )
   }

@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {AuthService} from "../../services/auth.service";
-import {User} from "../../model/model.user";
 import {Router} from "@angular/router";
 
 @Component({
@@ -21,7 +20,6 @@ export class ProfileComponent implements OnInit {
 
 // login out from the app
   logOutFromProfile() {
-    console.log('run LogOUT from profile')
     this.authService.logOut()
       .subscribe(
         data => {
