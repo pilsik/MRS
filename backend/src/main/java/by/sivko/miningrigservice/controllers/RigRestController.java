@@ -31,7 +31,7 @@ public class RigRestController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Rig>> getRigsOfUser(Principal principal) {
         List<Rig> rigList = this.userService.getUserRigsByUsername(principal.getName());
         if (rigList.isEmpty()) {
@@ -40,8 +40,9 @@ public class RigRestController {
         return new ResponseEntity<>(rigList, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> createRig(@Valid RigDto rigDto, Principal principal, UriComponentsBuilder ucBuilder) {
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Void> createRig(@RequestBody @Valid RigDto rigDto, Principal principal, UriComponentsBuilder ucBuilder) {
         String username = principal.getName();
         User user = this.userService.findUserByUsername(username);
         if (checkExistRigByName(user.getUserRigList(), rigDto.getName())) {
@@ -66,7 +67,7 @@ public class RigRestController {
         return isExist;
     }
 
-    @RequestMapping(value = "/rig/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/rig/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Rig> getRig(@PathVariable long id, Principal principal) {
         List<Rig> rigs = this.userService.getUserRigsByUsername(principal.getName());
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
@@ -83,15 +84,15 @@ public class RigRestController {
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
         if (rig != null) {
             rigService.removeRig(rig);
-
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.LOCKED);
         }
     }
 
-    @RequestMapping(value = "/rig/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> changeRigPasswordOrName(@PathVariable long id, @Valid RigDto rigDto, Principal principal) {
+    @CrossOrigin
+    @RequestMapping(value = "/rig/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Void> changeRigPasswordOrName(@PathVariable long id,@RequestBody @Valid RigDto rigDto, Principal principal) {
         List<Rig> rigs = this.userService.getUserRigsByUsername(principal.getName());
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
         if (rig != null) {

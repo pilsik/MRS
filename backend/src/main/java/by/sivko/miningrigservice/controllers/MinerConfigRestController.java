@@ -37,8 +37,9 @@ public class MinerConfigRestController {
         this.minerService = minerService;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> createRig(@Valid MinerConfigDto minerConfigDto, @RequestParam(required = false) Long minerId, Principal principal) {
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Void> createRig(@RequestBody @Valid MinerConfigDto minerConfigDto, @RequestParam(required = false) Long minerId, Principal principal) {
         String username = principal.getName();
         User user = this.userService.findUserByUsername(username);
         if (checkExistConfigByName(user.getMinerConfigs(), minerConfigDto.getName(), 0)) {
@@ -67,7 +68,7 @@ public class MinerConfigRestController {
         return isExist;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<MinerConfig>> getAllMinerConfigs(Principal principal) {
         List<MinerConfig> rigSet = this.userService.getUserMinerConfigsByUsername(principal.getName());
         if (rigSet.isEmpty()) {
@@ -76,7 +77,7 @@ public class MinerConfigRestController {
         return new ResponseEntity<>(rigSet, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/config/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/config/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<MinerConfig> getMinerConfigById(@PathVariable long id, Principal principal) {
         MinerConfig minerConfig = checkOwnerConfig(principal.getName(), id);
         if (minerConfig != null) {
@@ -86,8 +87,9 @@ public class MinerConfigRestController {
         }
     }
 
-    @RequestMapping(value = "/config/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> changeMinerConfig(@PathVariable long id, @Valid MinerConfigDto minerConfigDto, @RequestParam(required = false) Long minerId, Principal principal) {
+    @CrossOrigin
+    @RequestMapping(value = "/config/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Void> changeMinerConfig(@PathVariable long id,@RequestBody @Valid MinerConfigDto minerConfigDto, @RequestParam(required = false) Long minerId, Principal principal) {
         String name = principal.getName();
         MinerConfig minerConfig = checkOwnerConfig(name, id);
         if (minerConfig != null) {

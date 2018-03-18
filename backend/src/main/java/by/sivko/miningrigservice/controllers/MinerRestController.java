@@ -23,7 +23,7 @@ public class MinerRestController {
         this.minerService = minerService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Miner>> getAllMiners() {
         List<Miner> minerList = this.minerService.getAllMiners();
         if (minerList.isEmpty()) {
@@ -33,7 +33,7 @@ public class MinerRestController {
         }
     }
 
-    @RequestMapping(value = "/miner/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/miner/{id}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Miner> getMinerById(@PathVariable long id) {
         Miner miner = this.minerService.getMinerById(id);
         if (miner == null) {

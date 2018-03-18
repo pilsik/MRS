@@ -8,7 +8,7 @@ public class RigDto {
 
     @Length(min = 3, message = "*Your nameRig must have at least 3 characters")
     @NotEmpty(message = "*Please provide your name")
-        private String name;
+    private String name;
 
     @Length(min = 3, message = "*Your password must have at least 3 characters")
     @NotEmpty(message = "*Please provide your password")

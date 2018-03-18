@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {User} from "../../model/model.user";
+import {User} from "../../model/user.model";
 import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";
 

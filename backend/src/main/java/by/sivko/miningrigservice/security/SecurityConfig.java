@@ -52,14 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // starts authorizing configurations
                 .authorizeRequests()
                 // ignoring the guest's urls "
-                .antMatchers("/api/account/register","/api/account/login","/logout").permitAll()
+                .antMatchers("/api/account/login","/api/account/register","/logout","/api/account/logout").permitAll()
                 // authenticate all remaining URLS
                 .anyRequest().fullyAuthenticated().and()
       /* "/logout" will log the user out by invalidating the HTTP Session,
        * cleaning up any {link rememberMe()} authentication that was configured, */
                 .logout()
                 .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/api/account/logout", "POST"))
                 .and()
                 // enabling the basic authentication
                 .httpBasic().and()

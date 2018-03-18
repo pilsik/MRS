@@ -29,7 +29,7 @@ BEGIN TRANSACTION;
     "id"   BIGINT PRIMARY KEY DEFAULT "nextval"('"rig_seq"'),
     "name" VARCHAR(100) NOT NULL,
     "user_id" BIGINT NOT NULL,
-    "miner_config_id" BIGINT NOT NULL,
+    "miner_config_id" BIGINT,
     "password" VARCHAR(100) NOT NULL,
     "realParamNames" VARCHAR(100)
   );

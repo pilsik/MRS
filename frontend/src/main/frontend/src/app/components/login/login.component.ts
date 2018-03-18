@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {User} from "../../model/model.user";
+import {User} from "../../model/user.model";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 
@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
+
   user: User=new User();
   errorMessage:string;
   constructor(private authService :AuthService, private router: Router) { }
@@ -19,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log('login.component');
     this.authService.logIn(this.user)
       .subscribe(data=>{
         this.router.navigate(['/profile']);

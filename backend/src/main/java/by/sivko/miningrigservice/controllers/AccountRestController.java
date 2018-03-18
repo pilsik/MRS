@@ -26,7 +26,7 @@ public class AccountRestController {
     @CrossOrigin
     @RequestMapping("/account/login")
     public String user(Principal principal) {
-        return principal.getName();
+        return principal != null ? principal.getName() : null;
     }
 
     @CrossOrigin
