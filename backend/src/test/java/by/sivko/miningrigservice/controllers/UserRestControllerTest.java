@@ -39,17 +39,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class UserRestControllerTest {
 
     private static final int SUCCESSES_STATUS = 200;
-    private static final int SUCCESSES_CREATED_STATUS = 201;
     private static final int RESPONSE_CONFLICT_BAD_STATUS = 409;
     private static final String USER_NAME = "USER_NAME";
     private static final String WRONG_USER_NAME = "WRONG_USER_NAME";
-    private static final String REQUEST_PARAM_USERNAME = "username";
     private static final String PATH_USER = "/api/user";
     private static final String REQUEST_PARAM_USERNAME_VALUE = "user";
-    private static final String REQUEST_PARAM_EMAIL = "email";
-    private static final String REQUEST_PARAM_EMAIL_VALUE = "user@user.us";
     private static final String REQUEST_PARAM_PASSWORD = "password";
-    private static final String REQUEST_PARAM_PASSWORD_VALUE = "password";
     private static final String USER_EMAIL = "USER_EMAIL";
     private static final String NEW_REQUEST_PARAM_PASSWORD_VALUE = "NEW_REQUEST_PARAM_PASSWORD_VALUE";
     private static final String PASSWORD_LESS_FIVE_LETTERS = "five";
@@ -95,33 +90,6 @@ public class UserRestControllerTest {
                 .thenReturn(USER_NAME);
         Mockito.when(userService.getAllUsers())
                 .thenReturn(new ArrayList<>(Arrays.asList(userReturnMock, userReturnMock2)));
-    }
-
-    @Test
-    public void createNewUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(PATH_USER)
-                .param(REQUEST_PARAM_USERNAME, REQUEST_PARAM_USERNAME_VALUE)
-                .param(REQUEST_PARAM_EMAIL, REQUEST_PARAM_EMAIL_VALUE)
-                .param(REQUEST_PARAM_PASSWORD, REQUEST_PARAM_PASSWORD_VALUE))
-                .andExpect(MockMvcResultMatchers.status().is(SUCCESSES_CREATED_STATUS));
-    }
-
-    @Test
-    public void createExistUserByUsername() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(PATH_USER)
-                .param(REQUEST_PARAM_USERNAME, REQUEST_PARAM_USERNAME_VALUE)
-                .param(REQUEST_PARAM_EMAIL, USER_EMAIL)
-                .param(REQUEST_PARAM_PASSWORD, REQUEST_PARAM_PASSWORD_VALUE))
-                .andExpect(MockMvcResultMatchers.status().is(RESPONSE_CONFLICT_BAD_STATUS));
-    }
-
-    @Test
-    public void createExistUserByEmail() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(PATH_USER)
-                .param(REQUEST_PARAM_USERNAME, USER_NAME)
-                .param(REQUEST_PARAM_EMAIL, REQUEST_PARAM_EMAIL_VALUE)
-                .param(REQUEST_PARAM_PASSWORD, REQUEST_PARAM_PASSWORD_VALUE))
-                .andExpect(MockMvcResultMatchers.status().is(RESPONSE_CONFLICT_BAD_STATUS));
     }
 
     @Test

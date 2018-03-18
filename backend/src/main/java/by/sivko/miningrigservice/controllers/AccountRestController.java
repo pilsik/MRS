@@ -30,14 +30,15 @@ public class AccountRestController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/account/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/account/register", method = RequestMethod.POST, consumes = "application/json",
+            produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
         User user = new User(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());
         User userExistsLogin = this.userService.findUserByUsername(user.getUsername());
         if (userExistsLogin != null) {
             throw new AlreadyExistsException("A user with this name already exists");
         }
-        User userExistsEmail = this.userService.findUserByUsername(user.getEmail());
+        User userExistsEmail = this.userService.findUserByEmail(user.getEmail());
         if (userExistsEmail != null) {
             throw new AlreadyExistsException("A user with this email already exists");
         }
