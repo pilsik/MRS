@@ -11,6 +11,7 @@ export class RigsComponent implements OnInit {
 
   rigs: Rig[];
   statusCode: number;
+  requestProcessing = false;
 
   constructor(private rigService: RigService) {
   }
@@ -24,4 +25,21 @@ export class RigsComponent implements OnInit {
       data => this.rigs = data,
       errorCode => this.statusCode = errorCode);
   }
+
+  private deleteRig(id: number) {
+    this.preProcessConfigurations();
+    this.rigService.removeRigById(id).subscribe(
+      successCode => {
+        this.statusCode = successCode;
+        this.getAllRigs();
+      },
+      errorCode => this.statusCode = errorCode
+    );
+  }
+
+  private preProcessConfigurations() {
+    this.statusCode = null;
+    this.requestProcessing = true;
+  }
+
 }

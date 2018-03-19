@@ -30,7 +30,7 @@ public class Rig implements Serializable {
     private Status status;
 
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     private User user;
 

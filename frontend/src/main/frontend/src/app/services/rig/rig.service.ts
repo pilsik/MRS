@@ -4,6 +4,7 @@ import {Rig} from "../../model/rig.model";
 import {AppComponent} from "../../app.component";
 import {AuthService} from "../auth.service";
 import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class RigService {
@@ -28,13 +29,19 @@ export class RigService {
       .map(resp => resp.json());
   }
 
-  /*getRigsById(id: number) {
-    return this.http.get('/api/rigs/rig/' + id)
+  getRigsById(id: number) {
+    return this.http.get(this.rigsUrl+'/rig/' + id, {headers: this.headers})
       .map(resp => resp.json());
   }
 
   removeRigById(id: number) {
-    return this.http.delete('/api/rigs/rig/' + id);
-  }*/
+    return this.http.delete(this.rigsUrl+'/rig/' + id, {headers: this.headers})
+      .map(success => success.status)
+      .catch(this.handleError);
+  }
 
+  private handleError (error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.status);
+  }
 }

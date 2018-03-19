@@ -12,6 +12,7 @@ import java.util.List;
 @Transactional
 public class MinerServiceImpl implements MinerService{
 
+
     private final MinerDao minerDao;
 
     @Autowired

@@ -78,12 +78,13 @@ public class RigRestController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/rig/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> removeRig(@PathVariable long id, Principal principal) {
         List<Rig> rigs = this.userService.getUserRigsByUsername(principal.getName());
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
         if (rig != null) {
-            rigService.removeRig(rig);
+            this.rigService.removeRig(rig);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.LOCKED);
