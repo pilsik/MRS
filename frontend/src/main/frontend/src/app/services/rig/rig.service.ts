@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
-import {Headers,Http} from "@angular/http";
+import {Headers, Http} from "@angular/http";
 import {Rig} from "../../model/rig.model";
 import {AppComponent} from "../../app.component";
 import {AuthService} from "../auth.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class RigService {
@@ -22,18 +23,18 @@ export class RigService {
     return this.http.post(this.rigsUrl, rig, {headers: this.headers});
   }
 
-  getAllRigs() {
-    return this.http.get('/api/rigs')
+  getAllRigs(): Observable<Rig[]> {
+    return this.http.get(this.rigsUrl, {headers: this.headers})
       .map(resp => resp.json());
   }
 
-  getRigsById(id: number) {
+  /*getRigsById(id: number) {
     return this.http.get('/api/rigs/rig/' + id)
       .map(resp => resp.json());
   }
 
   removeRigById(id: number) {
     return this.http.delete('/api/rigs/rig/' + id);
-  }
+  }*/
 
 }

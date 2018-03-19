@@ -1,0 +1,8 @@
+<table class="table table-hover">
+  <tr><th>#</th><th>Name</th><th>Password</th><th>Status</th><th>minerConfig</th><th></th><th></th></tr>
+  <tr *ngFor="let rig of rigs" >
+    <td>{{rig.id}}</td> <td>{{rig.name}}</td> <td>{{rig.password}}</td><td>{{rig.status}}</td><td>{{rig.minerConfig}}</td>
+   <!-- <td><button type="button" (click)="loadRigToEdit(rig.id)">Edit</button> </td>
+    <td><button type="button" (click)="deleteRig(rig.id)">Delete</button></td>-->
+  </tr>
+</table>

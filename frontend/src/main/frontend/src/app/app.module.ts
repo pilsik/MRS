@@ -14,6 +14,7 @@ import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {CreateRigComponent} from './components/create-rig/create-rig.component';
 import {RigService} from "./services/rig/rig.service";
+import { RigsComponent } from './components/rigs/rigs.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {RigService} from "./services/rig/rig.service";
     RegisterComponent,
     ProfileComponent,
     CreateRigComponent,
+    RigsComponent,
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, routing, FacebookModule.forRoot(),
