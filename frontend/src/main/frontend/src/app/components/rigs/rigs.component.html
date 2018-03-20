@@ -1,8 +1,135 @@
-<table class="table table-hover">
-  <tr><th>#</th><th>Name</th><th>Password</th><th>Status</th><th>minerConfig</th><th></th><th></th></tr>
-  <tr *ngFor="let rig of rigs" >
-    <td>{{rig.id}}</td> <td>{{rig.name}}</td> <td>{{rig.password}}</td><td>{{rig.status}}</td><td>{{rig.minerConfig}}</td>
-  <!-- <td><button type="button" (click)="loadRigToEdit(rig.id)">Edit</button> </td>-->
-    <td><button type="button" class=".btn .btn-danger" (click)="deleteRig(rig.id)">Delete</button></td>
-  </tr>
-</table>
+<!--Alerts-->
+<section>
+  <div class="container-fluid" style="margin-top: 100px;">
+    <div class="row">
+      <div class="product-options">
+        <a id="successAlert" class="btn btn-mini">successAlert</a>
+        <a id="errorAlert" class="btn btn-mini">errorAlert</a>
+        <button class="btn-sm btn btn-primary-outline">
+          <i class="fas fa-sync fa-spin"></i>
+          <i class="fas fa-spinner fa-pulse"></i>
+        </button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="first-h1">Success alert</h1>
+        <hr>
+        <div class="alert alert-success alert-dismissible fade in" id="success-alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success!</strong> This alert box could indicate a successful or positive action.
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="first-h1">Error alert</h1>
+        <hr>
+        <div class="alert alert-danger alert-dismissible fade in" id="error-alert">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error!</strong> This alert box could indicate a error or positive action.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Alerts-->
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Bootstrap Snipp for Datatable</h4>
+        <div class="table-responsive">
+          <table id="mytable" class="table table-inverse table-hover">
+            <thead>
+            <tr>
+              <th><input type="checkbox" id="checkall"/></th>
+              <th>#</th>
+              <th>Name</th>
+              <th>Password</th>
+              <th>Status</th>
+              <th>minerConfig</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rig of rigs">
+              <td><input type="checkbox" class="checkthis"/></td>
+              <td>{{rig.id}}</td>
+              <td>{{rig.name}}</td>
+              <td>{{rig.password}}</td>
+              <td>{{rig.status}}</td>
+              <td>{{rig.minerConfig}}</td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                  <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </p>
+              </td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                  <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </p>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--MODAL-DIALOG-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align">Delete this entry</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <!-- modal-content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align">Edit Your Detail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Mohsin">
+        </div>
+        <div class="form-group">
+          <input class="form-control " type="text" placeholder="Irshad">
+        </div>
+        <div class="form-group">
+          <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--MODAL-DIALOG-->

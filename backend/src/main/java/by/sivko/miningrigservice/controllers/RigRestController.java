@@ -84,6 +84,7 @@ public class RigRestController {
         List<Rig> rigs = this.userService.getUserRigsByUsername(principal.getName());
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
         if (rig != null) {
+            rigs.remove(rig);
             this.rigService.removeRig(rig);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {

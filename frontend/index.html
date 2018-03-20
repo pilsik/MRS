@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Mining Rig Service</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	    <!-- Latest compiled and minified JavaScript -->
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+	    <style type="text/css">
+	    	#login-dp{
+			    min-width: 250px;
+			    padding: 14px 14px 0;
+			    overflow:hidden;
+			    background-color:rgba(255,255,255,.8);
+			}
+			#login-dp .help-block{
+			    font-size:12px    
+			}
+			#login-dp .bottom{
+			    background-color:rgba(255,255,255,.8);
+			    border-top:1px solid #ddd;
+			    clear:both;
+			    padding:14px;
+			}
+			#login-dp .form-group {
+			    margin-bottom: 10px;
+			}
+			#register-dp{
+				min-width: 250px;
+			    padding: 14px 14px 0;
+			    overflow:hidden;
+			    background-color:rgba(255,255,255,.8);
+			}
+			#register-dp .form-group {
+			    margin-bottom: 10px;
+			}
+	    </style>
+	    <style type="text/css">
+	    	.footer {
+			    position: absolute;
+			    bottom: 0;
+			    width: 100%;
+			    height: 60px;
+			    line-height: 60px;
+			    background-color: #f5f5f5;
+			}
+			body {
+				background-color: #edf1f5;
+			}
+	    </style>
+	</head>
+	<body>
+		<div class="main-wrapper">
+			<div class="app">
+				<!-- HEADER -->
+				<header>
+					<nav class="navbar navbar-inverse navbar-fixed-top">
+					  <div class="container-fluid">
+					    <div class="navbar-header">
+					      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapseNavbar">
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>                        
+					      </button>
+					      <a class="navbar-brand" href="#">WebSiteName</a>
+					    </div>
+					    <div class="collapse navbar-collapse" id="collapseNavbar">
+						    <ul class="nav navbar-nav">
+						      <li class="active"><a href="#">Home</a></li>
+						      <li><a href="#">Page 1</a></li>
+						      <li><a href="#">Page 2</a></li>
+						    </ul>
+						    <ul class="nav navbar-nav navbar-right">
+						      <li class="dropdown">
+						      	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b>Sign Up</b></a>
+								<ul id="register-dp" class="dropdown-menu">
+									<li>
+										<div class="row">
+											<div class="col-md-12">
+												<form class="form" method="post" action="#">
+													<div class="form-group">
+														<label for="username" class="cols-sm-2 control-label">Username</label>
+														<div class="cols-sm-10">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+																<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="email" class="cols-sm-2 control-label">Your Email</label>
+														<div class="cols-sm-10">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+																<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+															</div>
+														</div>
+													</div>
+
+
+													<div class="form-group">
+														<label for="confirm" class="cols-sm-2 control-label">Confirm Email</label>
+														<div class="cols-sm-10">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+																<input type="text" class="form-control" name="confirm_email" id="confirm_email"  placeholder="Confirm your Email"/>
+															</div>
+														</div>
+													</div>
+
+													
+													<div class="form-group">
+														<label for="password" class="cols-sm-2 control-label">Password</label>
+														<div class="cols-sm-10">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+																<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+														<div class="cols-sm-10">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+																<input type="password" class="form-control" name="confirm_password" id="confirm_password"  placeholder="Confirm your Password"/>
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group ">
+														<button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</li>
+								</ul>
+						      <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> <b>Login</b></a>
+								<ul id="login-dp" class="dropdown-menu">
+									<li>
+										<div class="row">
+											<div class="col-md-12">
+												<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+													<div class="form-group">
+														<label class="sr-only" for="exampleInputEmail2">Username or Email address</label>
+														<input type="email" class="form-control" id="exampleInputUsername" placeholder="Username or Email address" required>
+														</div>
+														<div class="form-group">
+															<label class="sr-only" for="exampleInputPassword2">Password</label>
+															<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" required>
+					                                        <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+														</div>
+														<div class="form-group">
+															<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+														</div>
+														<div class="checkbox">
+															<label>
+																 <input type="checkbox"> keep me logged-in
+															</label>
+														</div>
+												</form>
+											</div>
+										</div>
+									</li>
+								</ul>
+						    	<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>LogOut</a></li>
+						    </ul>
+						  </div>
+						</div>
+					</nav>
+				</header>
+				<!-- HEADER -->
+				<!--Alerts-->
+				<section>
+					<div class="container-fluid" style="margin-top: 100px;">
+						<div class="row">
+							<div class="product-options">
+						    	<a id="successAlert" class="btn btn-mini">successAlert</a>
+						    	<a id="errorAlert" class="btn btn-mini">errorAlert</a>
+			                      <button class="btn-sm btn btn-primary-outline">
+			                       <i class="fas fa-sync fa-spin"></i>
+			                       <i class="fas fa-spinner fa-pulse"></i>
+			                      </button>
+							</div>
+						</div>
+						<hr>
+					    <div class="row">
+					    	<div class="col-md-12">
+					    	<h1 class="first-h1">Success alert</h1>
+					    	<hr>
+					    	<div class="alert alert-success alert-dismissible fade in" id="success-alert">
+							    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+							</div>
+					      </div>
+					    </div>
+					    <script type="text/javascript">
+						$(document).ready (function(){
+						    $("#success-alert").hide();
+						        $("#successAlert").click(function showAlert() {
+						        	$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+						               $("#success-alert").slideUp(500);
+						            });   
+						        });
+						});
+						</script>
+						<hr>
+					    <div class="row">
+					    	<div class="col-md-12">
+					    	<h1 class="first-h1">Error alert</h1>
+					    	<hr>
+					    	<div class="alert alert-danger alert-dismissible fade in" id="error-alert">
+							    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							    <strong>Error!</strong> This alert box could indicate a error or positive action.
+							</div>
+					      </div>
+					    </div>
+					    <script type="text/javascript">
+						    $(document).ready (function(){
+							    $("#error-alert").hide();
+							        $("#errorAlert").click(function showAlert() {
+							        	$("#error-alert").fadeTo(2000, 500).slideUp(1000, function(){
+							               $("#error-alert").slideUp(1000);
+							            });   
+							        });
+							});
+						</script>
+					</div>
+				</section>
+				<!--Alerts-->
+				<!--Table-->
+				<section>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<h4>Bootstrap Snipp for Datatable</h4>
+       							<div class="table-responsive">
+       								<table id="mytable" class="table table-inverse" >
+       									<thead>
+       										<tr>
+       											<th><input type="checkbox" id="checkall" /></th>
+							                   	<th>First Name</th>
+							                    <th>Last Name</th>
+							                    <th>Address</th>
+							                    <th>Email</th>
+							                    <th>Contact</th>
+							                    <th>Edit</th>
+							                    <th>Delete</th>
+       										</tr>
+       									</thead>
+       									<tbody>
+       										<tr>
+												<td><input type="checkbox" class="checkthis" /></td>
+												<td>Mohsin</td>
+												<td>Irshad</td>
+												<td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+												<td>isometric.mohsin@gmail.com</td>
+												<td>+923335586757</td>
+												<td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+												<td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+       										</tr>
+       										<tr>
+       											<td><input type="checkbox" class="checkthis" /></td>
+											    <td>Mohsin</td>
+											    <td>Irshad</td>
+											    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+											    <td>isometric.mohsin@gmail.com</td>
+											    <td>+923335586757</td>
+											    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+											    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+       										</tr>
+       										<tr>
+       											<td><input type="checkbox" class="checkthis" /></td>
+											    <td>Mohsin</td>
+											    <td>Irshad</td>
+											    <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+											    <td>isometric.mohsin@gmail.com</td>
+											    <td>+923335586757</td>
+											    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+											    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+       										</tr>
+       									</tbody>
+       								</table>
+       							</div>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							$("#mytable #checkall").click(function () {
+							        if ($("#mytable #checkall").is(':checked')) {
+							            $("#mytable input[type=checkbox]").each(function () {
+							                $(this).prop("checked", true);
+							            });
+
+							        } else {
+							            $("#mytable input[type=checkbox]").each(function () {
+							                $(this).prop("checked", false);
+							            });
+							        }
+							    });   
+							    $("[data-toggle=tooltip]").tooltip();
+						});
+					</script>
+				</section>
+				<!--Table-->
+				<!-- Modal -->
+				<section>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+								    <div class="modal-dialog">
+								    	<!-- modal-content --> 
+										<div class="modal-content">
+										    <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+										        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+										    </div>
+										    <div class="modal-body">
+										       	<div class="form-group">
+										        	<input class="form-control " type="text" placeholder="Mohsin">
+										        </div>
+										        <div class="form-group">
+										        <input class="form-control " type="text" placeholder="Irshad">
+										        </div>
+										        <div class="form-group">
+										        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+										        </div>
+										    </div>
+										    <div class="modal-footer ">
+										        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+										    </div>
+										</div>
+									<!-- /.modal-content --> 
+									</div>
+							    <!-- /.modal-dialog --> 
+							    </div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+									    <div class="modal-dialog">
+									    	<div class="modal-content">
+									          	<div class="modal-header">
+									        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+									        		<h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+									      		</div>
+									          	<div class="modal-body">					       
+									       			<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+									      		</div>
+									        	<div class="modal-footer ">
+									        		<button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+									        		<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+									      		</div>
+									        </div>
+									    <!-- /.modal-content --> 
+									  </div>
+									      <!-- /.modal-dialog --> 
+									</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- Modal -->
+
+				<section>
+					
+				</section>
+	            <!--CONTENT-->
+	            <footer class="footer">
+				    <div class="container">
+				    	<span class="text-muted">Place sticky footer content here.</span>
+				    </div>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>
