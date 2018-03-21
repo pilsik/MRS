@@ -21,7 +21,7 @@ export class CreateRigComponent implements OnInit {
 
   createRig(){
     this.rigService.createRig(this.rig).subscribe(data => {
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/rigs']);
       }, err => {
         this.errorMessage = err.json().errorMessage;
       }

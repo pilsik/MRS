@@ -1,0 +1,13 @@
+app-alert {
+  width: 100%;
+  align-items: center;
+  position: fixed;
+  top: 2%;
+  left: 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  overflow: auto;
+  z-index: 1;
+  cursor: default;
+}
