@@ -1,22 +1,30 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Rig} from "../../model/rig.model";
 import {RigService} from "../../services/rig/rig.service";
 import $ from 'jquery';
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {DeleteRigComponent} from "../delete-rig/delete-rig.component";
+import {CreateRigComponent} from "../create-rig/create-rig.component";
 
 @Component({
   selector: 'app-rigs',
   templateUrl: './rigs.component.html',
-  styleUrls: ['./rigs.component.css']
+  styleUrls: ['./rigs.component.css'],
 })
 export class RigsComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('deleteModal')
+  deleteModalComponent:DeleteRigComponent;
+
+  @ViewChild('createModal')
+  createModalComponent:CreateRigComponent;
 
   alertsStatusCode: number[] = [];
   rigs: Rig[];
   statusCode: number;
-  deletedRigId: number;
   modalReference: NgbModalRef;
   editingRig: Rig = new Rig();
+  errorMessage: string;
 
   constructor(private rigService: RigService, private modalService: NgbModal) {
   }
@@ -50,6 +58,7 @@ export class RigsComponent implements OnInit, AfterViewInit {
   }
 
   openForEdit(editModal, rig) {
+    this.errorMessage = null;
     this.editingRig = <Rig>this.deepCopy(rig);
     this.modalReference = this.modalService.open(editModal);
     this.modalReference.result.then(() => {
@@ -58,37 +67,29 @@ export class RigsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  open(deleteModal, id) {
-    this.deletedRigId = id;
-    this.modalReference = this.modalService.open(deleteModal);
-    this.modalReference.result.then(() => {
-      this.deletedRigId = 0;
-      this.modalService.open(deleteModal).close()
-    });
-  }
-
-  deleteRig(id: number) {
-    this.rigService.removeRigById(id).subscribe(
-      successCode => {
-        this.showAlert(successCode);
-        this.getAllRigs();
-      },
-      errorCode => this.showAlert(errorCode)
-    );
-    this.modalReference.close();
-    setTimeout(() => this.statusCode = null, 3000);
-  }
-
   editRig(rig: Rig) {
     this.rigService.editRig(rig).subscribe(
       successCode => {
-        this.showAlert(successCode);
+        this.showAlert(successCode.status);
         this.getAllRigs();
+        this.modalReference.close();
+        setTimeout(() => this.statusCode = null, 3000);
       },
-      errorCode => this.showAlert(errorCode)
+      err => this.errorMessage = err.json().errorMessage
     );
-    this.modalReference.close();
-    setTimeout(() => this.statusCode = null, 3000);
+  }
+
+  deleteRig(id: number){
+    this.deleteModalComponent.open(id);
+  }
+
+  createRig(){
+    this.createModalComponent.open();
+  }
+
+  updateRigList(statusCode){
+    this.getAllRigs();
+    this.showAlert(statusCode);
   }
 
   showAlert(statusCode: number) {

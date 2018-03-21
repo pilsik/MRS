@@ -1,0 +1,12 @@
+INSERT INTO rigs VALUES (1,'admin', 1, null, 'password');
+INSERT INTO rigs VALUES (2,'admin2', 1, null, 'password');
+INSERT INTO rigs VALUES (3,'admin3', 1, null, 'password');
+INSERT INTO rigs VALUES (4,'admin4', 1, null, 'password');
+INSERT INTO rigs VALUES (5,'admin5', 1, null, 'password');
+INSERT INTO rigs VALUES (6,'admin6', 1, null, 'password');
+INSERT INTO rigs VALUES (7,'admin7', 1, null, 'password');
+INSERT INTO rigs VALUES (8,'admin8', 1, null, 'password');
+INSERT INTO rigs VALUES (9,'admin9', 1, null, 'password');
+INSERT INTO rigs VALUES (10,'admin10', 1, null, 'password');
+INSERT INTO rigs VALUES (11,'admin11', 1, null, 'password');
+INSERT INTO rigs VALUES (12,'admin12', 1, null, 'password');

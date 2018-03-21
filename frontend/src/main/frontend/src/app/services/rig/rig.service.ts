@@ -41,9 +41,7 @@ export class RigService {
   }
 
   editRig(rig: Rig) {
-    return this.http.put(this.rigsUrl + '/rig/' + rig.id.toString(), rig, {headers: this.headers})
-      .map(success => success.status)
-      .catch(this.handleError);
+    return this.http.put(this.rigsUrl + '/rig/' + rig.id.toString(), rig, {headers: this.headers});
   }
 
   private handleError(error: Response | any) {

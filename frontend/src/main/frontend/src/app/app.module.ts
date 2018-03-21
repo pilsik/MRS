@@ -17,6 +17,7 @@ import {RigService} from "./services/rig/rig.service";
 import {RigsComponent} from './components/rigs/rigs.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from './components/alert/alert.component';
+import { DeleteRigComponent } from './components/delete-rig/delete-rig.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AlertComponent } from './components/alert/alert.component';
     CreateRigComponent,
     RigsComponent,
     AlertComponent,
+    DeleteRigComponent,
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, routing, FacebookModule.forRoot(),NgbModule.forRoot(),
