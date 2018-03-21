@@ -18,6 +18,7 @@ import {RigsComponent} from './components/rigs/rigs.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from './components/alert/alert.component';
 import { DeleteRigComponent } from './components/delete-rig/delete-rig.component';
+import { EditRigComponent } from './components/edit-rig/edit-rig.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DeleteRigComponent } from './components/delete-rig/delete-rig.component
     RigsComponent,
     AlertComponent,
     DeleteRigComponent,
+    EditRigComponent,
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, routing, FacebookModule.forRoot(),NgbModule.forRoot(),

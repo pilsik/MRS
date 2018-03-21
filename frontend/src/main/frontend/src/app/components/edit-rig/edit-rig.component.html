@@ -1,16 +1,17 @@
-<ng-template #createModal let-c="close" let-d="dismiss">
+<ng-template #editModal let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Create new rig</h4>
+    <h4 class="modal-title">Edit rig with id{{editingRig.id}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="c()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form name="form" (ngSubmit)="f.form.valid && createRig()" #f="ngForm" novalidate>
+    <form name="form" (ngSubmit)="f.form.valid && editRig(editingRig)" #f="ngForm" novalidate>
       <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+      <!--<span id="reauth-email" class="reauth-email"></span>-->
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
         <label for="name">Name</label>
-        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="rig.name"
+        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="editingRig.name"
                #name="ngModel" required minlength="3"/>
         <div *ngIf="f.submitted && !name.valid" class="help-block">
           <div *ngIf="name.errors.required">
@@ -23,7 +24,7 @@
       </div>
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
         <label for="password">Password</label>
-        <input type="text" class="form-control" name="password" id="password" [(ngModel)]="rig.password"
+        <input type="text" class="form-control" name="password" id="password" [(ngModel)]="editingRig.password"
                #password="ngModel" required minlength="3"/>
         <div *ngIf="f.submitted && !password.valid" class="help-block">
           <div *ngIf="password.errors.required">
@@ -34,7 +35,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Create Rig</button>
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Update Rig</button>
       <button class="btn btn-lg btn-danger btn-block btn-cancel" type="button" (click)="c()">Cancel</button>
     </form>
   </div>

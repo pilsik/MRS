@@ -94,18 +94,14 @@ public class RigRestController {
 
     @CrossOrigin
     @RequestMapping(value = "/rig/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Void> changeRigPasswordOrName(@PathVariable long id,@RequestBody @Valid RigDto rigDto, Principal principal) {
+    public ResponseEntity<Void> changeRigPasswordOrName(@PathVariable long id, @RequestBody @Valid RigDto rigDto, Principal principal) {
         List<Rig> rigs = this.userService.getUserRigsByUsername(principal.getName());
         Rig rig = checkUserOwnerRigAndGetRig(rigs, id);
         if (rig != null) {
-            if (rigDto.getPassword() != null && !rigDto.getPassword().isEmpty()) {
-                rig.setPassword(rigDto.getPassword());
-            }
-            if (rigDto.getName() != null && !rigDto.getName().isEmpty()) {
-                if (checkExistRigByName(rigs, rigDto.getName()))
-                    throw new AlreadyExistsException(String.format("A rig with name [%s] already exist", rigDto.getName()));
-                rig.setName(rigDto.getName());
-            }
+            rig.setPassword(rigDto.getPassword());
+            if (checkExistRigByName(rigs, rigDto.getName()) && !rig.getName().equals(rigDto.getName()))
+                throw new AlreadyExistsException(String.format("A rig with name [%s] already exist", rigDto.getName()));
+            rig.setName(rigDto.getName());
             this.rigService.addRig(rig);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
