@@ -12,14 +12,8 @@ import {EditRigComponent} from "../edit-rig/edit-rig.component";
 })
 export class RigsComponent implements OnInit {
 
-  @ViewChild('deleteModal')
-  deleteModalComponent: DeleteRigComponent;
-
-  @ViewChild('createModal')
-  createModalComponent: CreateRigComponent;
-
-  @ViewChild('editModal')
-  editModalComponent: EditRigComponent;
+/*  @ViewChild('deleteModal')
+  deleteModalComponent: DeleteRigComponent;*/
 
   alertsStatusCode: number[] = [];
   rigs: Rig[];
@@ -38,19 +32,6 @@ export class RigsComponent implements OnInit {
     this.rigService.getAllRigs().subscribe(
       data => this.rigs = data,
       errorCode => this.statusCode = errorCode);
-  }
-
-
-  deleteRig(id: number) {
-    this.deleteModalComponent.open(id);
-  }
-
-  createRig() {
-    this.createModalComponent.open();
-  }
-
-  editRig(rig: Rig) {
-    this.editModalComponent.open(rig);
   }
 
   updateRigList(statusCode) {
