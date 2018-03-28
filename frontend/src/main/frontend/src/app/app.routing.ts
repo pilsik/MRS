@@ -12,8 +12,6 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'rigs', component: RigsComponent, canActivate: [UrlPermission]},
-  {path: 'rigs/create', component: CreateRigComponent, canActivate: [UrlPermission]},
-  // otherwise redirect to profile
   {path: '**', redirectTo: '/login'}
 ];
 

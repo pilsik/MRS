@@ -1,9 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Rig} from "../../model/rig.model";
-import {RigService} from "../../services/rig/rig.service";
-import {DeleteRigComponent} from "../delete-rig/delete-rig.component";
-import {CreateRigComponent} from "../create-rig/create-rig.component";
-import {EditRigComponent} from "../edit-rig/edit-rig.component";
+import {Rig} from "../../../model/rig.model";
+import {RigService} from "../../services/rig.service";
 
 @Component({
   selector: 'app-rigs',
@@ -11,9 +8,6 @@ import {EditRigComponent} from "../edit-rig/edit-rig.component";
   styleUrls: ['./rigs.component.css'],
 })
 export class RigsComponent implements OnInit {
-
-/*  @ViewChild('deleteModal')
-  deleteModalComponent: DeleteRigComponent;*/
 
   alertsStatusCode: number[] = [];
   rigs: Rig[];

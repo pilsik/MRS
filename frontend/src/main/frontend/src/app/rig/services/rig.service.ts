@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Headers, Http} from "@angular/http";
 import {Rig} from "../../model/rig.model";
 import {AppComponent} from "../../app.component";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../../services/auth.service";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
-import {Rig} from "../../model/rig.model";
+import {Rig} from "../../../model/rig.model";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {RigService} from "../../services/rig/rig.service";
-import {UtilService} from "../../services/util.service";
+import {UtilService} from "../../../services/util.service";
 
 @Component({
   selector: 'app-edit-rig',
