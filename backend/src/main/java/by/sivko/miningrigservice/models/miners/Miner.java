@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "miners")
-public abstract class Miner {
+public class Miner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "miner_gen")
@@ -12,27 +12,23 @@ public abstract class Miner {
     protected Long id;
 
     @Column
-    private String name;
+    private final String name;
 
     @Column(name = "path_to_exe_file")
     private final String PATH_TO_EXE_FILE;
 
     @Column
-    private String defaultCommandLineWithParameters;
+    private final String defaultCommandLineWithParameters;
 
-    @Column
-    private String version;
-
-    @Column
-    private String dateRealise;
-
-    public Miner(String name, String PATH_TO_EXE_FILE, String defaultCommandLineWithParameters, String version, String dateRealise) {
+    public Miner(String name, String PATH_TO_EXE_FILE, String defaultCommandLineWithParameters, String version) {
         this.name = name;
         this.PATH_TO_EXE_FILE = PATH_TO_EXE_FILE;
         this.defaultCommandLineWithParameters = defaultCommandLineWithParameters;
         this.version = version;
-        this.dateRealise = dateRealise;
     }
+
+    @Column
+    protected String version;
 
     public String getPATH_TO_EXE_FILE() {
         return PATH_TO_EXE_FILE;
@@ -46,11 +42,8 @@ public abstract class Miner {
         return version;
     }
 
-    public String getDateRealise() {
-        return dateRealise;
-    }
-
     public String getName() {
         return name;
     }
+
 }

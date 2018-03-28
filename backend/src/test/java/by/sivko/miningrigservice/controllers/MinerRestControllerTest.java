@@ -72,9 +72,9 @@ public class MinerRestControllerTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        Miner firstMiner = new Miner(FIRST_MINER_NAME, FIRST_MINER_PATH_TO_EXE_FILE, FIRST_MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, FIRST_MINER_VERSION, FIRST_MINER_DATA_REALISE) {
+        Miner firstMiner = new Miner(FIRST_MINER_NAME, FIRST_MINER_PATH_TO_EXE_FILE, FIRST_MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, FIRST_MINER_VERSION) {
         };
-        Miner secondMiner = new Miner(SECOND_MINER_NAME, SECOND_MINER_PATH_TO_EXE_FILE, SECOND_MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, SECOND_MINER_VERSION, SECOND_MINER_DATA_REALISE) {
+        Miner secondMiner = new Miner(SECOND_MINER_NAME, SECOND_MINER_PATH_TO_EXE_FILE, SECOND_MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, SECOND_MINER_VERSION) {
         };
         Mockito.when(mockMinerService.getAllMiners()).thenReturn(new ArrayList<>(Arrays.asList(firstMiner, secondMiner)));
         Mockito.when(mockMinerService.getMinerById(FIRST_MINER_ID)).thenReturn(firstMiner);

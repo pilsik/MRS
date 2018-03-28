@@ -18,8 +18,7 @@
           <table id="mytable" class="table table-inverse table-hover">
             <thead>
             <tr>
-              <th><input type="checkbox" id="checkall"/></th>
-              <th>#</th>
+              <th>Id</th>
               <th>Name</th>
               <th>Password</th>
               <th>Status</th>
@@ -30,7 +29,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let rig of rigs">
-              <td><input type="checkbox" class="checkthis"/></td>
               <td>{{rig.id}}</td>
               <td>{{rig.name}}</td>
               <td>{{rig.password}}</td>

@@ -83,8 +83,7 @@ BEGIN TRANSACTION;
     "name" VARCHAR(100) NOT NULL,
     "path_to_exe_file" VARCHAR(100) NOT NULL,
     "default_command_line_with_parameters" VARCHAR(100) NOT NULL,
-    "version" VARCHAR(100) NOT NULL,
-    "date_realise" VARCHAR(100) NOT NULL
+    "version" VARCHAR(100) NOT NULL
   );
 
   CREATE TABLE "miner_configs" (

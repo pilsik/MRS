@@ -118,7 +118,7 @@ public class MinerConfigRestControllerTest {
         }
         List<MinerConfig> userMinerConfigs = new ArrayList<>(Arrays.asList(firstMinerConfig, secondMinerConfig));
         user.setMinerConfigs(userMinerConfigs);
-        Miner miner = new Miner(MINER_NAME, MINER_PATH_TO_EXE_FILE, MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, MINER_VERSION, MINER_DATA_REALISE) {
+        Miner miner = new Miner(MINER_NAME, MINER_PATH_TO_EXE_FILE, MINER_DEFAULT_COMMAND_LINE_WITH_PARAMETERS, MINER_VERSION) {
         };
         Mockito.when(mockPrincipal.getName()).thenReturn(MOCK_GET_NAME);
         Mockito.when(mockPrincipalWithEmptyMinerConfigs.getName()).thenReturn(MOCK_GET_NAME_EMPTY_CONFIGS);
