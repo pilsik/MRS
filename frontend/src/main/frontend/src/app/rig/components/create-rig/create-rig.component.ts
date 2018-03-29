@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Rig} from "../../../model/rig.model";
-import {RigService} from "../../services/rig/rig.service";
 import {Router} from "@angular/router";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {RigService} from "../../services/rig.service";
 
 @Component({
   selector: 'app-create-rig',

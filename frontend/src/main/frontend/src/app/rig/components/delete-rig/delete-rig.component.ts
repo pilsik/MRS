@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {RigService} from "../../services/rig/rig.service";
+import {RigService} from "../../services/rig.service";
 
 @Component({
   selector: 'app-delete-rig',

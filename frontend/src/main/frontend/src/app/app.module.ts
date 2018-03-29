@@ -12,13 +12,9 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
-import {CreateRigComponent} from './components/create-rig/create-rig.component';
-import {RigService} from "./services/rig/rig.service";
-import {RigsComponent} from './components/rigs/rigs.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AlertComponent } from './components/alert/alert.component';
-import { DeleteRigComponent } from './components/delete-rig/delete-rig.component';
-import { EditRigComponent } from './components/edit-rig/edit-rig.component';
+import {RigModule} from './rig/rig.module'
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -26,16 +22,17 @@ import { EditRigComponent } from './components/edit-rig/edit-rig.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    CreateRigComponent,
-    RigsComponent,
-    AlertComponent,
-    DeleteRigComponent,
-    EditRigComponent,
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, routing, FacebookModule.forRoot(),NgbModule.forRoot(),
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    routing,
+    FacebookModule.forRoot(),
+    NgbModule.forRoot(),
+    RigModule
   ],
-  providers: [AuthService, AccountService, UrlPermission, RigService],
+  providers: [AuthService, AccountService, UrlPermission],
   bootstrap: [AppComponent]
 })
 export class AppModule {
