@@ -14,7 +14,6 @@ import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RigModule} from './rig/rig.module'
-import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [

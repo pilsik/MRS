@@ -4,7 +4,6 @@ import {RegisterComponent} from "./components/register/register.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {UrlPermission} from "./urlPermission/url.permission";
 
-
 const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [UrlPermission]},
   {path: 'login', component: LoginComponent},
