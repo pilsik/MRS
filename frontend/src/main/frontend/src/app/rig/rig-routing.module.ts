@@ -4,7 +4,7 @@ import {RigsComponent} from "./components/rigs/rigs.component";
 
 const rigRoutes: Routes = [
   {
-    path: 'rigs', component: RigsComponent,
+    path: '', component: RigsComponent,
   }
 ];
 

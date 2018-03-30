@@ -9,11 +9,10 @@ import {AuthService} from "./services/auth.service";
 import {HttpModule} from "@angular/http";
 import {AccountService} from "./services/account.service";
 import {ProfileComponent} from './components/profile/profile.component';
-import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {RigModule} from './rig/rig.module'
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -26,10 +25,9 @@ import {RigModule} from './rig/rig.module'
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing,
+    AppRoutingModule,
     FacebookModule.forRoot(),
     NgbModule.forRoot(),
-    RigModule
   ],
   providers: [AuthService, AccountService, UrlPermission],
   bootstrap: [AppComponent]

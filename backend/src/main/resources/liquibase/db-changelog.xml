@@ -14,4 +14,8 @@
         <sqlFile path="../sql/001_init_test.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
 
+    <changeSet id="add_miners" author="Sergey Ivko">
+        <sqlFile path="../sql/002_add_miners.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
+
 </databaseChangeLog>
