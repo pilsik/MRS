@@ -9,16 +9,19 @@ public class Miner {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "miner_gen")
     @SequenceGenerator(name = "miner_gen", sequenceName = "miner_seq")
-    protected Long id;
+    private Long id;
 
     @Column
-    private final String name;
+    private String name;
 
     @Column(name = "path_to_exe_file")
-    private final String PATH_TO_EXE_FILE;
+    private String PATH_TO_EXE_FILE;
 
     @Column
-    private final String defaultCommandLineWithParameters;
+    private String defaultCommandLineWithParameters;
+
+    public Miner() {
+    }
 
     public Miner(String name, String PATH_TO_EXE_FILE, String defaultCommandLineWithParameters, String version) {
         this.name = name;
@@ -46,4 +49,7 @@ public class Miner {
         return name;
     }
 
+    public Long getId() {
+        return id;
+    }
 }

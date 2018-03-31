@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 @Transactional
 public class MinerConfigServiceImpl implements MinerConfigService {
 
-
     private final MinerConfigDao minerConfigDao;
 
     @Autowired

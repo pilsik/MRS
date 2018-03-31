@@ -20,7 +20,7 @@ public class MinerConfig implements Serializable {
     private String name;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE},fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private User user;
 

@@ -1,3 +1,6 @@
 export class MinerConfig {
-  id : string = "";
+  id : string;
+  name: string;
+  commandLine: string;
+  minerId: number;
 }

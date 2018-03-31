@@ -13,6 +13,7 @@ import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from "./app-routing.module";
+import {MinerService} from "./services/miner.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {AppRoutingModule} from "./app-routing.module";
     FacebookModule.forRoot(),
     NgbModule.forRoot(),
   ],
-  providers: [AuthService, AccountService, UrlPermission],
+  providers: [AuthService, AccountService, UrlPermission, MinerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,6 @@
 
 <button class=".btn btn-primary" (click)="createModal.open()">Create rig</button>
-<button class=".btn btn-danger" [routerLink]="['/configs']">Show rig</button>
+<button class=".btn btn-danger" [routerLink]="['/configs']">Show configs</button>
 <button class=".btn btn-success" [routerLink]="['/profile']">Profile</button>
 <app-create-rig #createModal (onCreateRig)="updateRigList($event)"></app-create-rig>
 

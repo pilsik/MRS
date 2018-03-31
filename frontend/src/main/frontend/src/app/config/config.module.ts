@@ -6,6 +6,8 @@ import {SharedModule} from "../shared/shared.module";
 import {ConfigRoutingModule} from "./config-routing.module";
 import {ConfigService} from "./service/config.service";
 import {ConfigsComponent} from "./components/configs/configs.component";
+import {CreateConfigComponent} from './components/create-config/create-config.component';
+import {DeleteConfigComponent} from './components/delete-config/delete-config.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,7 @@ import {ConfigsComponent} from "./components/configs/configs.component";
     ConfigRoutingModule,
     SharedModule
   ],
-  declarations: [ConfigsComponent],
+  declarations: [ConfigsComponent, CreateConfigComponent, DeleteConfigComponent],
   providers: [ConfigService]
 })
 export class ConfigModule {

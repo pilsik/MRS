@@ -3,7 +3,7 @@ import {AuthService} from "../../services/auth.service";
 import {AppComponent} from "../../app.component";
 import {Headers, Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {Config} from "../../model/config.model";
+import {MinerConfig} from "../../model/minerConfig.model";
 
 @Injectable()
 export class ConfigService {
@@ -19,11 +19,11 @@ export class ConfigService {
               private authService: AuthService) {
   }
 
-  createConfig(config: Config) {
+  createConfig(config: MinerConfig) {
     return this.http.post(this.configsUrl, config, {headers: this.headers});
   }
 
-  getAllConfigs(): Observable<Config[]> {
+  getAllConfigs(): Observable<MinerConfig[]> {
     return this.http.get(this.configsUrl, {headers: this.headers})
       .map(resp => resp.json());
   }
@@ -39,7 +39,7 @@ export class ConfigService {
       .catch(this.handleError);
   }
 
-  editConfig(config: Config) {
+  editConfig(config: MinerConfig) {
     return this.http.put(this.configsUrl + '/config/' + config.id.toString(), config, {headers: this.headers});
   }
 

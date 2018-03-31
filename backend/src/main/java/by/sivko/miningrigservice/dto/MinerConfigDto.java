@@ -3,18 +3,24 @@ package by.sivko.miningrigservice.dto;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+
 public class MinerConfigDto {
 
     @Length(min = 3, message = "*Your configName must have at least 3 characters")
     @NotEmpty(message = "*Please provide your name")
     private String name;
 
-    @NotEmpty(message = "*Please provide your commandLine")
+    @NotNull
     private String commandLine;
 
-    public MinerConfigDto(String name, String commandLine) {
+    @NotNull
+    private Long minerId;
+
+    public MinerConfigDto(String name, String commandLine, Long minerId) {
         this.name = name;
         this.commandLine = commandLine;
+        this.minerId = minerId;
     }
 
     public MinerConfigDto() {
@@ -34,5 +40,13 @@ public class MinerConfigDto {
 
     public void setCommandLine(String commandLine) {
         this.commandLine = commandLine;
+    }
+
+    public Long getMinerId() {
+        return minerId;
+    }
+
+    public void setMinerId(Long minerId) {
+        this.minerId = minerId;
     }
 }
