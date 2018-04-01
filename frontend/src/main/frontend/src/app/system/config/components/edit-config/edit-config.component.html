@@ -1,0 +1,52 @@
+<ng-template #editModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit config with id{{editingConfig.id}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="form" (ngSubmit)="f.form.valid && editConfig(editingConfig)" #f="ngForm" novalidate>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="editingConfig.name" #name="ngModel" required minlength="3"/>
+        <div *ngIf="f.submitted && !name.valid" class="help-block">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !minerId.valid }">
+        <label for="minerId">MinerId</label>
+        <select class="form-control" name="minerId" id="minerId" #minerId="ngModel" [(ngModel)]="editingConfig.minerId"
+                required (change)="setDefaultConfigCommandLine($event.target.selectedIndex)">
+          <option *ngFor="let miner of miners" [ngValue]="miner.id">
+            {{miner.id}}-{{miner.name}}
+          </option>
+        </select>
+        <div *ngIf="f.submitted && !minerId.valid" class="help-block">
+          <div *ngIf="minerId.errors.required">
+            minerId is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !commandLine.valid }"
+           *ngIf="editingConfig.commandLine">
+        <label for="commandLine">CommandLine</label>
+        <input type="text" class="form-control" name="commandLine" id="commandLine" [(ngModel)]="editingConfig.commandLine"
+               #commandLine="ngModel" required/>
+        <div *ngIf="f.submitted && !commandLine.valid" class="help-block">
+          <div *ngIf="commandLine.errors.required">
+            commandLine is required.
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Update Config</button>
+      <button class="btn btn-lg btn-danger btn-block btn-cancel" type="button" (click)="c()">Cancel</button>
+    </form>
+  </div>
+</ng-template>

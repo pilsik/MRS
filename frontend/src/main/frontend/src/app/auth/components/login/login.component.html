@@ -1,0 +1,32 @@
+<form class="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <p class="h5 text-center mb-4">Sign in</p>
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+
+    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username"
+               #username="ngModel" required mdbActive/>
+        <label for="username">Username or Email</label>
+        <div *ngIf="f.submitted && !username.valid" class="help-block">Username/Login is required</div>
+    </div>
+
+    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" class="form-control" id="password" name="password"
+               [(ngModel)]="user.password"
+               #password="ngModel" required mdbActive/>
+        <label for="password">Your password</label>
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    </div>
+
+    <div id="remember" class="checkbox"></div>
+
+    <div class="text-center">
+        <button class="btn btn-deep-orange waves-light" type="submit">Sign in</button>
+        <button type="button" class="btn btn-default waves-light" [routerLink]="['/registration']" mdbRippleRadius>
+            Create new
+            Account!
+        </button>
+    </div>
+</form>
+

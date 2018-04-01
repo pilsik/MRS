@@ -1,0 +1,53 @@
+<form class="form-signup" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+    <p class="h5 text-center mb-4">Sign up</p>
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+
+    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username"
+               #username="ngModel" required minlength="3" mdbActive/>
+        <label for="username">Username</label>
+        <div *ngIf="f.submitted && !username.valid" class="help-block">
+            <div *ngIf="username.errors.required">
+                Username is required.
+            </div>
+            <div *ngIf="username.errors.minlength">
+                Username must be at least 3 characters long.
+            </div>
+        </div>
+    </div>
+
+    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="text" class="form-control" name="email" id="email" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.email"
+               #email="ngModel" required mdbActive/>
+        <label for="email">Email Address</label>
+        <div *ngIf="f.submitted && !email.valid" class="help-block">
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+            <div *ngIf="email.errors.pattern">
+                A valid email address is required
+            </div>
+        </div>
+    </div>
+
+    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password"
+               #password="ngModel" required minlength="5" mdbActive/>
+        <label for="password">Password</label>
+        <div *ngIf="f.submitted && !password.valid" class="help-block">
+            <div *ngIf="password.errors.required">
+                Password is required.
+            </div>
+            <div *ngIf="password.errors.minlength">
+                Password must be at least 5 characters long.
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Create Account</button>
+    <button [routerLink]="['/login']" class="btn btn-lg btn-danger btn-block btn-cancel" type="button">Cancel</button>
+</form>
+

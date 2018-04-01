@@ -1,0 +1,6 @@
+<div *ngIf="show" id="toast-container" class="toast-top-right" [@smoothAppearance]
+     [ngStyle]="{backgroundColor: typeMessage}">
+    <div class="toast" [ngClass]="{'toast-error': isError, 'toast-success': isSuccess, 'toast-warning': isWarning, 'toast-info': isInfo}">
+        <div class="toast-message">{{message}}</div>
+    </div>
+</div>

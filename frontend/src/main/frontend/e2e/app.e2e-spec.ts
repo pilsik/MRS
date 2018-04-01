@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { QuickstartAngular2Page } from './app.po';
 
-describe('miningrig-service App', () => {
-  let page: AppPage;
+describe('quickstart-angular2 App', () => {
+  let page: QuickstartAngular2Page;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new QuickstartAngular2Page();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

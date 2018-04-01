@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,7 +52,8 @@ public class MinerConfigRestController {
                 Miner miner = this.minerService.getMinerById(minerConfigDto.getMinerId());
                 if (miner != null)
                     minerConfig.setMiner(miner);
-                else throw new NotExistException(String.format("A miner with id [%s] NOT exist", minerConfigDto.getMinerId()));
+                else
+                    throw new NotExistException(String.format("A miner with id [%s] NOT exist", minerConfigDto.getMinerId()));
             }
             this.minerConfigService.addMinerConfig(minerConfig);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -70,19 +72,23 @@ public class MinerConfigRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<MinerConfig>> getAllMinerConfigs(Principal principal) {
-        List<MinerConfig> rigSet = this.userService.getUserMinerConfigsByUsername(principal.getName());
-        if (rigSet.isEmpty()) {
+    public ResponseEntity<List<MinerConfigDto>> getAllMinerConfigs(Principal principal) {
+        List<MinerConfig> minerConfigList = this.userService.getUserMinerConfigsByUsername(principal.getName());
+        if (minerConfigList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(rigSet, HttpStatus.OK);
+        List<MinerConfigDto> minerConfigDtoList = new ArrayList<>();
+        for (MinerConfig minerConfig : minerConfigList) {
+            minerConfigDtoList.add(new MinerConfigDto(minerConfig.getId(), minerConfig.getName(), minerConfig.getCommandLine(), minerConfig.getMiner().getId()));
+        }
+        return new ResponseEntity<>(minerConfigDtoList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/config/{id}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<MinerConfig> getMinerConfigById(@PathVariable long id, Principal principal) {
+    public ResponseEntity<MinerConfigDto> getMinerConfigById(@PathVariable long id, Principal principal) {
         MinerConfig minerConfig = checkOwnerConfig(principal.getName(), id);
         if (minerConfig != null) {
-            return new ResponseEntity<>(minerConfig, HttpStatus.OK);
+            return new ResponseEntity<>(new MinerConfigDto(minerConfig.getId(), minerConfig.getName(), minerConfig.getCommandLine(), minerConfig.getMiner().getId()), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.LOCKED);
         }
@@ -90,7 +96,7 @@ public class MinerConfigRestController {
 
     @CrossOrigin
     @RequestMapping(value = "/config/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Void> changeMinerConfig(@PathVariable long id,@RequestBody @Valid MinerConfigDto minerConfigDto, Principal principal) {
+    public ResponseEntity<Void> changeMinerConfig(@PathVariable long id, @RequestBody @Valid MinerConfigDto minerConfigDto, Principal principal) {
         String name = principal.getName();
         MinerConfig minerConfig = checkOwnerConfig(name, id);
         if (minerConfig != null) {
@@ -114,7 +120,7 @@ public class MinerConfigRestController {
 
     @CrossOrigin
     @RequestMapping(value = "/config/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<MinerConfig> removeMinerConfig(@PathVariable long id, Principal principal) {
+    public ResponseEntity<Void> removeMinerConfig(@PathVariable long id, Principal principal) {
         MinerConfig minerConfig = checkOwnerConfig(principal.getName(), id);
         if (minerConfig != null) {
             minerConfig.getUser().getMinerConfigs().remove(minerConfig);

@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-@RequestMapping(value = "/api")
 public class AccountRestController {
 
     private UserService userService;
@@ -24,13 +23,18 @@ public class AccountRestController {
     }
 
     @CrossOrigin
-    @RequestMapping("/account/login")
+    @RequestMapping("/api/account/login")
     public String user(Principal principal) {
         return principal != null ? principal.getName() : null;
     }
 
+    @RequestMapping("/login")
+    public ResponseEntity<Void> forLogout() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @CrossOrigin
-    @RequestMapping(value = "/account/register", method = RequestMethod.POST, consumes = "application/json",
+    @RequestMapping(value = "/api/account/register", method = RequestMethod.POST, consumes = "application/json",
             produces = "application/json")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserDto userDto) {
         User user = new User(userDto.getUsername(), userDto.getPassword(), userDto.getEmail());

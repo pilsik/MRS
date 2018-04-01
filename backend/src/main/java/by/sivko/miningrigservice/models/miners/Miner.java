@@ -31,7 +31,7 @@ public class Miner {
     }
 
     @Column
-    protected String version;
+    private String version;
 
     public String getPATH_TO_EXE_FILE() {
         return PATH_TO_EXE_FILE;
