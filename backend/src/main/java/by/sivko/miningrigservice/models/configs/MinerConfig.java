@@ -5,6 +5,7 @@ import by.sivko.miningrigservice.models.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -17,6 +18,7 @@ public class MinerConfig implements Serializable {
     private Long id;
 
     @Column
+    @NotNull
     private String name;
 
     @JsonIgnore
@@ -83,5 +85,25 @@ public class MinerConfig implements Serializable {
 
     public String getCommandLine() {
         return commandLine;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MinerConfig that = (MinerConfig) o;
+
+        if (!id.equals(that.id)) return false;
+        if (!name.equals(that.name)) return false;
+        return user.equals(that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + user.hashCode();
+        return result;
     }
 }

@@ -14,9 +14,12 @@ public class RigDto {
     @NotEmpty(message = "*Please provide your password")
     private String password;
 
-    public RigDto(String name, String password) {
+    MinerConfigDto minerConfig;
+
+    public RigDto(String name, String password, MinerConfigDto minerConfig) {
         this.name = name;
         this.password = password;
+        this.minerConfig = minerConfig;
     }
 
     public RigDto() {
@@ -36,5 +39,13 @@ public class RigDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public MinerConfigDto getMinerConfig() {
+        return minerConfig;
+    }
+
+    public void setConfig(MinerConfigDto minerConfig) {
+        this.minerConfig = minerConfig;
     }
 }

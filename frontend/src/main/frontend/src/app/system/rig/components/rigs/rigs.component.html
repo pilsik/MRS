@@ -1,8 +1,8 @@
 <button class=".btn btn-primary" (click)="createModal.open()">Create rig</button>
 
-<app-create-rig #createModal (onCreateRig)="updateRigList($event)"></app-create-rig>
+<app-create-rig #createModal (onCreateRig)="updateRigList($event)" [configs]="configs"></app-create-rig>
 <app-delete-rig #deleteModal (onDeleteRig)="updateRigList($event)"></app-delete-rig>
-<app-edit-rig #editModal (onEditRig)="updateRigList($event)"></app-edit-rig>
+<app-edit-rig #editModal (onEditRig)="updateRigList($event)" [configs]="configs"></app-edit-rig>
 
 <app-alert *ngFor="let alert of alertsStatusCode" [alert]="alert" [typeEntity]="'Rig'"></app-alert>
 

@@ -6,6 +6,7 @@ import by.sivko.miningrigservice.dto.MinerConfigDto;
 import by.sivko.miningrigservice.dto.MinerDto;
 import by.sivko.miningrigservice.models.configs.MinerConfig;
 import by.sivko.miningrigservice.models.miners.Miner;
+import by.sivko.miningrigservice.models.rigs.Rig;
 import by.sivko.miningrigservice.models.user.User;
 import by.sivko.miningrigservice.services.configs.MinerConfigService;
 import by.sivko.miningrigservice.services.miner.MinerService;
@@ -124,6 +125,11 @@ public class MinerConfigRestController {
         MinerConfig minerConfig = checkOwnerConfig(principal.getName(), id);
         if (minerConfig != null) {
             minerConfig.getUser().getMinerConfigs().remove(minerConfig);
+            for (Rig rig : minerConfig.getUser().getUserRigList()) {
+                if (rig.getMinerConfig() != null && rig.getMinerConfig().equals(minerConfig)) {
+                    rig.setMinerConfig(null);
+                }
+            }
             this.minerConfigService.removeMinerConfig(minerConfig);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

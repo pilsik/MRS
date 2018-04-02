@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="md-form">
-                        <input mdbActive type="password" id="editModalForm2" class="form-control"
+                        <input mdbActive type="text" id="editModalForm2" class="form-control"
                                data-error="Please enter rig password" data-success="OK"
                                formControlName="controllerRigPassword" [(ngModel)]="editingRig.password">
                         <label for="editModalForm2">Enter rig password</label>
@@ -47,9 +47,20 @@
                         </div>
                     </div>
 
+                    <div class="md-form">
+                        <select mdbActive id="editModalForm3" class="form-control form-control-lg"
+                                data-error="Please select config for rig" data-success="OK"
+                                [(ngModel)]="editingRig.minerConfig.id" formControlName="controllerRigConfig">
+                            <option *ngFor="let config of configs" [ngValue]="config.id">
+                                {{config.name}}
+                            </option>
+                        </select>
+                        <label for="editModalForm3">Choose config for rig</label>
+                    </div>
+
                     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="editRig(editingRig)"
                             [disabled]="!validatingForm.valid">
-                        Create Rig
+                        Update Rig
                     </button>
                     <button class="btn btn-lg btn-danger btn-block btn-cancel" type="button"
                             (click)="editModal.hide()">

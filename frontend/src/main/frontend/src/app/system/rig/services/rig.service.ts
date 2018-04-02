@@ -6,54 +6,61 @@ import 'rxjs/add/operator/catch';
 import {AppComponent} from "../../../app.component";
 import {AuthService} from "../../../shared/services/auth.service";
 import {Rig} from "../../../shared/models/rig.model";
+import {MinerConfig} from "../../../shared/models/minerConfig.model";
 
 @Injectable()
-export class RigService{
+export class RigService {
 
-  private rigsUrl = AppComponent.API_URL + '/api/rigs';
+    private rigsUrl = AppComponent.API_URL + '/api/rigs';
+    private configsUrl = AppComponent.API_URL + '/api/configs'
 
-  private headers = new Headers({
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + this.authService.getToken()
-  });
-
-  constructor(private http: Http,
-              private authService: AuthService) {
-  }
-
-  updateHeaders(){
-   this.headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + this.authService.getToken()
+    private headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.authService.getToken()
     });
-  }
 
-  createRig(rig: Rig) {
-    return this.http.post(this.rigsUrl, rig, {headers: this.headers});
-  }
+    constructor(private http: Http,
+                private authService: AuthService) {
+    }
 
-  getAllRigs(): Observable<Rig[]> {
-    return this.http.get(this.rigsUrl, {headers: this.headers})
-      .map(resp => resp.json());
-  }
+    updateHeaders() {
+        this.headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + this.authService.getToken()
+        });
+    }
 
-  getRigsById(id: number) {
-    return this.http.get(this.rigsUrl + '/rig/' + id, {headers: this.headers})
-      .map(resp => resp.json());
-  }
+    createRig(rig: Rig) {
+        return this.http.post(this.rigsUrl, rig, {headers: this.headers});
+    }
 
-  removeRigById(id: number) {
-    return this.http.delete(this.rigsUrl + '/rig/' + id, {headers: this.headers})
-      .map(success => success.status)
-      .catch(this.handleError);
-  }
+    getAllRigs(): Observable<Rig[]> {
+        return this.http.get(this.rigsUrl, {headers: this.headers})
+            .map(resp => resp.json());
+    }
 
-  editRig(rig: Rig) {
-    return this.http.put(this.rigsUrl + '/rig/' + rig.id.toString(), rig, {headers: this.headers});
-  }
+    getAllConfigs(): Observable<MinerConfig[]> {
+        return this.http.get(this.configsUrl, {headers: this.headers})
+            .map(resp => resp.json());
+    }
 
-  private handleError(error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.status);
-  }
+    getRigsById(id: number) {
+        return this.http.get(this.rigsUrl + '/rig/' + id, {headers: this.headers})
+            .map(resp => resp.json());
+    }
+
+    removeRigById(id: number) {
+        return this.http.delete(this.rigsUrl + '/rig/' + id, {headers: this.headers})
+            .map(success => success.status)
+            .catch(this.handleError);
+    }
+
+    editRig(rig: Rig) {
+        return this.http.put(this.rigsUrl + '/rig/' + rig.id.toString(), rig, {headers: this.headers});
+    }
+
+    private handleError(error: Response | any) {
+        console.error(error.message || error);
+        return Observable.throw(error.status);
+    }
 }

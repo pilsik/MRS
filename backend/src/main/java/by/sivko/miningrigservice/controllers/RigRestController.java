@@ -4,6 +4,7 @@ import by.sivko.miningrigservice.controllers.exceptions.AlreadyExistsException;
 import by.sivko.miningrigservice.dto.RigDto;
 import by.sivko.miningrigservice.models.rigs.Rig;
 import by.sivko.miningrigservice.models.user.User;
+import by.sivko.miningrigservice.services.configs.MinerConfigService;
 import by.sivko.miningrigservice.services.rig.RigService;
 import by.sivko.miningrigservice.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/rigs")
@@ -25,10 +27,13 @@ public class RigRestController {
 
     private UserService userService;
 
+    private MinerConfigService minerConfigService;
+
     @Autowired
-    public RigRestController(RigService rigService, UserService userService) {
+    public RigRestController(RigService rigService, UserService userService, MinerConfigService minerConfigService) {
         this.rigService = rigService;
         this.userService = userService;
+        this.minerConfigService = minerConfigService;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -49,6 +54,8 @@ public class RigRestController {
             throw new AlreadyExistsException(String.format("A rig with name [%s] already exist", rigDto.getName()));
         } else {
             Rig newRig = new Rig(rigDto.getName(), rigDto.getPassword(), user);
+            if (rigDto.getMinerConfig() != null)
+                newRig.setMinerConfig(minerConfigService.getMinerConfigById(rigDto.getMinerConfig().getId()));
             rigService.addRig(newRig);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ucBuilder.path("/rigs").buildAndExpand().toUri());
@@ -101,6 +108,9 @@ public class RigRestController {
             rig.setPassword(rigDto.getPassword());
             if (checkExistRigByName(rigs, rigDto.getName()) && !rig.getName().equals(rigDto.getName()))
                 throw new AlreadyExistsException(String.format("A rig with name [%s] already exist", rigDto.getName()));
+            if (rigDto.getMinerConfig() != null && rigDto.getMinerConfig().getId() != null)
+                if (rig.getMinerConfig() == null || (rigDto.getMinerConfig().getId().longValue() != rig.getMinerConfig().getId().longValue()) )
+                    rig.setMinerConfig(this.minerConfigService.getMinerConfigById(rigDto.getMinerConfig().getId()));
             rig.setName(rigDto.getName());
             this.rigService.addRig(rig);
             return new ResponseEntity<>(HttpStatus.OK);
