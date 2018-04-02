@@ -22,6 +22,7 @@ export class ConfigsComponent implements OnInit {
   constructor(private configService: ConfigService, private minerService: MinerService) { }
 
   ngOnInit() {
+    this.configService.updateHeaders();
     this.getAllConfigs();
     this.getAllMiners();
   }

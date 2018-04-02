@@ -1,18 +1,18 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light orange lighten-1">
+<mdb-navbar SideClass="navbar navbar-expand-xl navbar-light orange darken-4">
 
   <!-- Navbar brand -->
-  <logo><a class="navbar-brand" href="#">MRS</a></logo>
+  <logo><a class="navbar-brand">MRS</a></logo>
 
   <!-- Collapsible content -->
   <links>
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" [routerLink]="['/system/rigs']" mdbRippleRadius>Rigs<span class="sr-only">(current)</span></a>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link waves-light" [routerLink]="['/system/rigs']" mdbRippleRadius>Rigs</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" [routerLinkActive]="['active']">
         <a class="nav-link waves-light" [routerLink]="['/system/configs']" mdbRippleRadius>Configs</a>
       </li>
 
@@ -32,6 +32,9 @@
     </ul>
     <!-- Links -->
     <ul class="navbar-nav">
+      <li>
+        <a class="nav-link waves-light">{{currentUser}}</a>
+      </li>
       <li>
         <a class="nav-link waves-light" (click)="logOutFromProfile()"><i class="fa fa-sign-out prefix"></i> LogOut</a>
       </li>

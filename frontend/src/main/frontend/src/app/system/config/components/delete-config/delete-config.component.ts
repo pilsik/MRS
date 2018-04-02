@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ConfigService} from "../../service/config.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class DeleteConfigComponent implements OnInit {
   onDeleteConfig = new EventEmitter<number>();
 
   @ViewChild('deleteModal')
-  deleteModal: TemplateRef<any>;
+  deleteModal;
 
   deletedConfigId: number;
 
@@ -25,12 +25,7 @@ export class DeleteConfigComponent implements OnInit {
 
   open(id: number) {
     this.deletedConfigId = id;
-   /* this.modalReference = this.modalService.open(this.deleteModal);
-    this.modalReference.result.then(() => {
-        this.modalService.open(this.deleteModal).close()
-      },
-      () => {
-      });*/
+    this.deleteModal.show()
   }
 
   deleteConfig(id: number) {
@@ -42,7 +37,7 @@ export class DeleteConfigComponent implements OnInit {
         console.log(errorCode);
         this.onDeleteConfig.emit(errorCode);
       });
-    /*this.modalReference.close();*/
+    this.deleteModal.hide();
   }
 
 }

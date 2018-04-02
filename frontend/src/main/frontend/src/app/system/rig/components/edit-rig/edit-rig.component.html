@@ -1,60 +1,62 @@
-<div mdbModal #editModal="mdb-modal" class="modal fade" id="modalSubscription" tabindex="-1" role="dialog"
+<div mdbModal #editModal="mdb-modal" class="modal fade" id="modalSubscriptionEditRig" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
-        <!--Content-->
         <div class="modal-content">
-
-            <!--Header-->
             <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="title"><i class="fa fa-newspaper-o"></i>Update Rig</h4>
+                <h4 class="title"><i class="fa fa-newspaper-o"></i> Update rig</h4>
                 <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close"
                         (click)="editModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <!--Body-->
             <div class="modal-body mb-0">
-                <form name="form" (ngSubmit)="f.form.valid && editRig(editingRig)" #f="ngForm" novalidate>
-
-
+                <form [formGroup]="validatingForm">
                     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
 
-                    <div class="md-form form-sm" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-                        <input type="text" class="form-control" name="name" id="name" [(ngModel)]="editingRig.name"
-                               #name="ngModel" required minlength="3" mdbActive/>
-                        <label for="name">Enter rig name</label>
-                        <div *ngIf="f.submitted && !name.valid" class="help-block">
-                            <div *ngIf="name.errors.required">
-                                Name is required.
+                    <div class="md-form">
+                        <input mdbActive type="text" id="editModalForm1" class="form-control"
+                               data-error="Please enter rig name" data-success="OK"
+                               formControlName="controllerRigName" [(ngModel)]="editingRig.name">
+                        <label for="editModalForm1">Enter rig name</label>
+                        <div *ngIf="validatingForm.controls['controllerRigName'].touched">
+                            <div class="alert alert-danger"
+                                 *ngIf="validatingForm.controls['controllerRigName'].errors?.required">Please enter
+                                rig name
                             </div>
-                            <div *ngIf="name.errors.minlength">
-                                Name must be at least 3 characters long.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="md-form form-sm" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                        <input type="text" class="form-control" name="password" id="password" [(ngModel)]="editingRig.password"
-                               #password="ngModel" required minlength="3" mdbActive/>
-                        <label for="password">Enter rig password</label>
-                        <div *ngIf="f.submitted && !password.valid" class="help-block">
-                            <div *ngIf="password.errors.required">
-                                Password is required.
-                            </div>
-                            <div *ngIf="password.errors.minlength">
-                                Password must be at least 3 characters long.
+                            <div class="alert alert-danger"
+                                 *ngIf="validatingForm.controls['controllerRigName'].errors?.minlength">Name must be at least
+                                3 characters long.
                             </div>
                         </div>
                     </div>
 
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Update Rig</button>
-                    <button class="btn btn-lg btn-danger btn-block btn-cancel" type="button" (click)="editModal.hide()">
+                    <div class="md-form">
+                        <input mdbActive type="password" id="editModalForm2" class="form-control"
+                               data-error="Please enter rig password" data-success="OK"
+                               formControlName="controllerRigPassword" [(ngModel)]="editingRig.password">
+                        <label for="editModalForm2">Enter rig password</label>
+                        <div *ngIf="validatingForm.controls['controllerRigPassword'].touched">
+                            <div class="alert alert-danger"
+                                 *ngIf="validatingForm.controls['controllerRigPassword'].errors?.required">Please enter
+                                rig password
+                            </div>
+                            <div class="alert alert-danger"
+                                 *ngIf="validatingForm.controls['controllerRigPassword'].errors?.minlength">Password must be
+                                at least 3 characters long.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="editRig(editingRig)"
+                            [disabled]="!validatingForm.valid">
+                        Create Rig
+                    </button>
+                    <button class="btn btn-lg btn-danger btn-block btn-cancel" type="button"
+                            (click)="editModal.hide()">
                         Cancel
                     </button>
-
                 </form>
             </div>
         </div>
-        <!--/.Content-->
     </div>
 </div>

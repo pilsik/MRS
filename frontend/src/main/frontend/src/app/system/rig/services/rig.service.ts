@@ -8,7 +8,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {Rig} from "../../../shared/models/rig.model";
 
 @Injectable()
-export class RigService {
+export class RigService{
 
   private rigsUrl = AppComponent.API_URL + '/api/rigs';
 
@@ -19,6 +19,13 @@ export class RigService {
 
   constructor(private http: Http,
               private authService: AuthService) {
+  }
+
+  updateHeaders(){
+   this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + this.authService.getToken()
+    });
   }
 
   createRig(rig: Rig) {

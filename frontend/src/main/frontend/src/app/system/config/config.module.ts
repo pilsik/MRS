@@ -10,12 +10,18 @@ import {EditConfigComponent} from "./components/edit-config/edit-config.componen
 import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    ConfigRoutingModule
-  ],
-  declarations: [ConfigsComponent, CreateConfigComponent, DeleteConfigComponent, EditConfigComponent],
-  providers: [ConfigService]
+    imports: [
+        CommonModule,
+        SharedModule,
+        ConfigRoutingModule
+    ],
+    declarations: [
+        ConfigsComponent,
+        CreateConfigComponent,
+        DeleteConfigComponent,
+        EditConfigComponent
+    ],
+    providers: [ConfigService]
 })
-export class ConfigModule {}
+export class ConfigModule {
+}

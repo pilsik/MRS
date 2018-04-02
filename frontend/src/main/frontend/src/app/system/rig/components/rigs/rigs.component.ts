@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {RigService} from "../../services/rig.service";
 import {Rig} from "../../../../shared/models/rig.model";
 
+
 @Component({
   selector: 'app-rigs',
   templateUrl: './rigs.component.html',
@@ -16,10 +17,10 @@ export class RigsComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor(private rigService: RigService) {
-  }
+  constructor(private rigService: RigService) {}
 
   ngOnInit() {
+    this.rigService.updateHeaders();
     this.getAllRigs();
   }
 

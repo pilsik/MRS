@@ -125,7 +125,7 @@ public class MinerConfigRestController {
         if (minerConfig != null) {
             minerConfig.getUser().getMinerConfigs().remove(minerConfig);
             this.minerConfigService.removeMinerConfig(minerConfig);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.LOCKED);
         }

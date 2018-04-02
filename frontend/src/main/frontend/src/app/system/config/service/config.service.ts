@@ -21,6 +21,13 @@ export class ConfigService {
               private authService: AuthService) {
   }
 
+  updateHeaders(){
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + this.authService.getToken()
+    });
+  }
+
   createConfig(config: MinerConfig) {
     return this.http.post(this.configsUrl, config, {headers: this.headers});
   }

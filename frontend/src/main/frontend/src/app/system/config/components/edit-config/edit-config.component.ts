@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 
 import {ConfigService} from "../../service/config.service";
 import {Miner} from "../../../../shared/models/miner.model";
@@ -7,47 +8,56 @@ import {UtilService} from "../../../../shared/services/util.service";
 
 
 @Component({
-  selector: 'app-edit-config',
-  templateUrl: './edit-config.component.html',
-  styleUrls: ['./edit-config.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-edit-config',
+    templateUrl: './edit-config.component.html',
+    styleUrls: ['./edit-config.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class EditConfigComponent implements OnInit {
 
-  @Input()
-  miners: Miner[];
+    validatingForm: FormGroup;
 
-  editingConfig: MinerConfig;
-  errorMessage: string;
+    @Input()
+    miners: Miner[];
 
-  constructor(private configService: ConfigService) {
-  }
+    editingConfig: MinerConfig = new MinerConfig();
+    errorMessage: string;
 
-  @Output()
-  onEditConfig = new EventEmitter<number>();
+    constructor(private configService: ConfigService, private fb: FormBuilder) {
+        this.validatingForm = this.fb.group({
+            'requiredConfigName': [null, Validators.required],
+            'requiredConfigMiner': [null, Validators.required],
+            'requiredConfigCommandLine': [null, Validators.required],
+        });
+    }
 
-  @ViewChild('editModal')
-  editModal: TemplateRef<any>;
+    @Output()
+    onEditConfig = new EventEmitter<number>();
 
-  ngOnInit() {
-  }
+    @ViewChild('editModal')
+    editModal;
 
-  open(config: MinerConfig) {
-    this.errorMessage = null;
-    this.editingConfig = <MinerConfig>UtilService.deepCopy(config);
-  }
+    ngOnInit() {
+    }
 
-  editConfig(config: MinerConfig) {
-    this.configService.editConfig(config).subscribe(
-      data => {
-        this.onEditConfig.emit(data.status);
+    open(config: MinerConfig) {
         this.errorMessage = null;
-      },
-      err => this.errorMessage = err.json().errorMessage
-    );
-  }
+        this.editModal.show();
+        this.editingConfig = <MinerConfig>UtilService.deepCopy(config);
+    }
 
-  setDefaultConfigCommandLine(index: number) {
-    this.editingConfig.commandLine = this.miners[index].defaultCommandLineWithParameters;
-  }
+    editConfig(config: MinerConfig) {
+        this.configService.editConfig(config).subscribe(
+            data => {
+                this.onEditConfig.emit(data.status);
+                this.errorMessage = null;
+                this.editModal.hide();
+            },
+            err => this.errorMessage = err.json().errorMessage
+        );
+    }
+
+    setDefaultConfigCommandLine(index: number) {
+        this.editingConfig.commandLine = this.miners[index].defaultCommandLineWithParameters;
+    }
 }

@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+
 import {Rig} from "../../../../shared/models/rig.model";
 import {Router} from "@angular/router";
 import {RigService} from "../../services/rig.service";
-
 
 @Component({
   selector: 'app-create-rig',
@@ -11,6 +12,8 @@ import {RigService} from "../../services/rig.service";
   encapsulation: ViewEncapsulation.None
 })
 export class CreateRigComponent implements OnInit {
+
+  validatingForm: FormGroup;
 
   rig: Rig = new Rig();
   errorMessage: string;
@@ -21,7 +24,11 @@ export class CreateRigComponent implements OnInit {
   @ViewChild('createModal')
   createModal;
 
-  constructor(public rigService: RigService, public router: Router) {
+  constructor(public rigService: RigService, public router: Router,private fb: FormBuilder) {
+    this.validatingForm = this.fb.group({
+      'controllerRigName': [null, [Validators.required, Validators.minLength(3)]],
+      'controllerRigPassword': [null, [Validators.required, Validators.minLength(3)]],
+    });
   }
 
   ngOnInit() {
@@ -39,6 +46,7 @@ export class CreateRigComponent implements OnInit {
   }
 
   open() {
+    this.validatingForm.reset();
     this.rig = new Rig();
     this.createModal.show();
   }

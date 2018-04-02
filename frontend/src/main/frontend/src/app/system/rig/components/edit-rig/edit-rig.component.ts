@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+
 import {Rig} from "../../../../shared/models/rig.model";
 import {RigService} from "../../services/rig.service";
 import {UtilService} from "../../../../shared/services/util.service";
@@ -11,10 +13,16 @@ import {UtilService} from "../../../../shared/services/util.service";
 })
 export class EditRigComponent implements OnInit {
 
+  validatingForm: FormGroup;
+
   editingRig: Rig = new Rig();
   errorMessage: string;
 
-  constructor(private rigService: RigService) {
+  constructor(private rigService: RigService, private fb: FormBuilder) {
+    this.validatingForm = this.fb.group({
+      'controllerRigName': [null, [Validators.required, Validators.minLength(3)]],
+      'controllerRigPassword': [null, [Validators.required, Validators.minLength(3)]],
+    });
   }
 
   @Output()

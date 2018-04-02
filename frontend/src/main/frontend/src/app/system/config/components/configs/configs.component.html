@@ -1,9 +1,11 @@
-<!--<button class=".btn btn-danger" [routerLink]="['/rigs']">Show rigs</button>
+
 <app-alert *ngFor="let alert of alertsStatusCode" [alert]="alert" [typeEntity]="'Config'"></app-alert>
+
 <app-create-config #createModal (onCreateConfig)="updateConfigList($event)" [miners]="miners"></app-create-config>
 <app-delete-config #deleteModal (onDeleteConfig)="updateConfigList($event)"></app-delete-config>
-<app-edit-config #editModal (onEditConfig)="updateRigList($event)" [miners]="miners"></app-edit-config>
-<button class=".btn btn-primary" (click)="createModal.open()">Create Config</button>-->
+<app-edit-config #editModal (onEditConfig)="updateConfigList($event)" [miners]="miners"></app-edit-config>
+
+<button class=".btn btn-primary" (click)="createModal.open()">Create Config</button>
 
 <section>
   <div class="container-fluid">
