@@ -28,6 +28,20 @@ public class AccountRestController {
         return principal != null ? principal.getName() : null;
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/api/account/register/checkLogin", method = RequestMethod.GET)
+    public ResponseEntity<String> checkLogin(String login) {
+        boolean existUsername = this.userService.findUserByUsername(login) == null;
+        return existUsername ? new ResponseEntity<>("false", HttpStatus.OK) : new ResponseEntity<>("true", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/api/account/register/checkEmail", method = RequestMethod.GET)
+    public ResponseEntity<String> checkEmail(String email) {
+        boolean existEmail = this.userService.findUserByEmail(email) == null;
+        return existEmail ? new ResponseEntity<>("false", HttpStatus.OK) : new ResponseEntity<>("true", HttpStatus.OK);
+    }
+
     @RequestMapping("/login")
     public ResponseEntity<Void> forLogout() {
         return new ResponseEntity<>(HttpStatus.OK);

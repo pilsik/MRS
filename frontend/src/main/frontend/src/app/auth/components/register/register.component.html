@@ -1,53 +1,59 @@
-<form class="form-signup" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+<form [formGroup]="validatingForm" class="form-signup">
     <p class="h5 text-center mb-4">Sign up</p>
     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
 
-    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <div class="md-form">
         <i class="fa fa-user prefix grey-text"></i>
-        <input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username"
-               #username="ngModel" required minlength="3" mdbActive/>
+        <i class="fa fa-spinner fa-pulse" [hidden]="!validatingForm.get('controlUsername').pending.valueOf()"></i>
+        <input type="text" class="form-control" name="username" id="username" #username [(ngModel)]="user.username" formControlName="controlUsername" mdbActive/>
         <label for="username">Username</label>
-        <div *ngIf="f.submitted && !username.valid" class="help-block">
-            <div *ngIf="username.errors.required">
-                Username is required.
+        <div *ngIf="validatingForm.controls['controlUsername'].touched">
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlUsername'].errors?.required">Please enter username
             </div>
-            <div *ngIf="username.errors.minlength">
-                Username must be at least 3 characters long.
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlUsername'].errors?.minlength">Username must be at least 3 characters long
+            </div>
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlUsername'].errors && validatingForm.get('controlUsername').errors.usernameExist">Username already exist
             </div>
         </div>
     </div>
 
-    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+
+    <div class="md-form">
         <i class="fa fa-envelope prefix grey-text"></i>
-        <input type="text" class="form-control" name="email" id="email" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.email"
-               #email="ngModel" required mdbActive/>
+        <i class="fa fa-spinner fa-pulse" [hidden]="!validatingForm.get('controlEmail').pending.valueOf()"></i>
+        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" formControlName="controlEmail" mdbActive/>
         <label for="email">Email Address</label>
-        <div *ngIf="f.submitted && !email.valid" class="help-block">
-            <div *ngIf="email.errors.required">
-                Email is required.
+        <div *ngIf="validatingForm.controls['controlEmail'].touched">
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlEmail'].errors?.required">Please enter email
             </div>
-            <div *ngIf="email.errors.pattern">
-                A valid email address is required
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlEmail'].errors?.email">Incorrect email
+            </div>
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlEmail'].errors && validatingForm.get('controlEmail').errors.emailExist">Email already exist
             </div>
         </div>
     </div>
 
-    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+    <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
-        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password"
-               #password="ngModel" required minlength="5" mdbActive/>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password" formControlName="controlPassword" mdbActive/>
         <label for="password">Password</label>
-        <div *ngIf="f.submitted && !password.valid" class="help-block">
-            <div *ngIf="password.errors.required">
-                Password is required.
+        <div *ngIf="validatingForm.controls['controlPassword'].touched">
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlPassword'].errors?.required">Please enter password
             </div>
-            <div *ngIf="password.errors.minlength">
-                Password must be at least 5 characters long.
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlPassword'].errors?.minlength">Password must be at least 3 characters long
             </div>
         </div>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Create Account</button>
+    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="register()" [disabled]="!validatingForm.valid">Create Account</button>
     <button [routerLink]="['/login']" class="btn btn-lg btn-danger btn-block btn-cancel" type="button">Cancel</button>
 </form>
 
