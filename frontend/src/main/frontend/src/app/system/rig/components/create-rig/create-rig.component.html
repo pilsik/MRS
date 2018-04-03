@@ -24,7 +24,8 @@
                                 rig name
                             </div>
                             <div class="alert alert-danger"
-                                 *ngIf="validatingForm.controls['controllerRigName'].errors?.minlength">Name must be at least
+                                 *ngIf="validatingForm.controls['controllerRigName'].errors?.minlength">Name must be at
+                                least
                                 3 characters long.
                             </div>
                         </div>
@@ -41,7 +42,8 @@
                                 rig password
                             </div>
                             <div class="alert alert-danger"
-                                 *ngIf="validatingForm.controls['controllerRigPassword'].errors?.minlength">Password must be
+                                 *ngIf="validatingForm.controls['controllerRigPassword'].errors?.minlength">Password
+                                must be
                                 at least 3 characters long.
                             </div>
                         </div>
@@ -50,10 +52,13 @@
                     <div class="md-form">
                         <select mdbActive id="createModalForm3" class="form-control form-control-lg"
                                 data-error="Please select config for rig" data-success="OK"
-                                [(ngModel)]="rig.minerConfig" formControlName="controllerRigConfig">
-                            <option *ngFor="let config of configs" [ngValue]="config    ">
+                                [(ngModel)]="rig.minerConfig" formControlName="controllerRigConfig"
+                                (change)="checkCreateNewConfig($event.target.value)">
+                            <option [value]="null">None</option>
+                            <option *ngFor="let config of configs" [ngValue]="config">
                                 {{config.name}}
                             </option>
+                            <option [value]="CREATE_NEW_CONFIG" >Create new config</option>
                         </select>
                         <label for="createModalForm3">Choose config for rig</label>
                     </div>

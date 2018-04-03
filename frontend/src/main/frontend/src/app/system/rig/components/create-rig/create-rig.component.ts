@@ -14,6 +14,8 @@ import {MinerConfig} from "../../../../shared/models/minerConfig.model";
 })
 export class CreateRigComponent implements OnInit {
 
+    readonly CREATE_NEW_CONFIG: string = 'CREATE_NEW_CONFIG';
+
     @Input()
     configs: MinerConfig[];
 
@@ -56,5 +58,11 @@ export class CreateRigComponent implements OnInit {
         this.createModal.show();
     }
 
+    checkCreateNewConfig(value) {
+        if (value == this.CREATE_NEW_CONFIG) {
+            this.createModal.hide();
+            this.router.navigate(['/system/configs'], {});
+        }
+    }
 
 }

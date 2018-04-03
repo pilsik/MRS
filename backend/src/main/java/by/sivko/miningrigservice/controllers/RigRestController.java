@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/api/rigs")
@@ -118,7 +117,6 @@ public class RigRestController {
             return new ResponseEntity<>(HttpStatus.LOCKED);
         }
     }
-
 
     private Rig checkUserOwnerRigAndGetRig(List<Rig> rigList, long id) {
         for (Rig rig : rigList) {

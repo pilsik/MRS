@@ -8,19 +8,22 @@ import {EditRigComponent} from "./components/edit-rig/edit-rig.component";
 import {RigService} from "./services/rig.service";
 import {RigRoutingModule} from "./rig-routing.module";
 import {SharedModule} from "../../shared/shared.module";
+import {MinerConfigPipe} from "./pipes/miner-config.pipe";
 
 @NgModule({
-  declarations: [
-    CreateRigComponent,
-    RigsComponent,
-    DeleteRigComponent,
-    EditRigComponent,
-  ],
-  imports: [
-    CommonModule,
-    RigRoutingModule,
-    SharedModule,
-  ],
-  providers: [RigService]
+    declarations: [
+        CreateRigComponent,
+        RigsComponent,
+        DeleteRigComponent,
+        EditRigComponent,
+        MinerConfigPipe,
+    ],
+    imports: [
+        CommonModule,
+        RigRoutingModule,
+        SharedModule,
+    ],
+    providers: [RigService]
 })
-export class RigModule {}
+export class RigModule {
+}

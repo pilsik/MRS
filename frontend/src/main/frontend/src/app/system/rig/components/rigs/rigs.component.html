@@ -29,7 +29,7 @@
                         <td>{{rig.name}}</td>
                         <td>{{rig.password}}</td>
                         <td>{{rig.status}}</td>
-                        <td>{{rig.minerConfig}}</td>
+                        <td>{{rig.minerConfig | appMinerConfigPipe}}</td>
                         <td>
                             <button class="btn btn-primary btn-sm waves-light" (click)="editModal.open(rig)">
                                 <i class="fa fa-edit"></i>

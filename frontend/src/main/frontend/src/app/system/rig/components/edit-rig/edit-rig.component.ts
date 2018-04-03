@@ -5,6 +5,7 @@ import {Rig} from "../../../../shared/models/rig.model";
 import {RigService} from "../../services/rig.service";
 import {UtilService} from "../../../../shared/services/util.service";
 import {MinerConfig} from "../../../../shared/models/minerConfig.model";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-edit-rig',
@@ -14,6 +15,8 @@ import {MinerConfig} from "../../../../shared/models/minerConfig.model";
 })
 export class EditRigComponent implements OnInit {
 
+    readonly CREATE_NEW_CONFIG: string = 'CREATE_NEW_CONFIG';
+
     @Input()
     configs: MinerConfig[];
 
@@ -22,7 +25,7 @@ export class EditRigComponent implements OnInit {
     editingRig: Rig = new Rig();
     errorMessage: string;
 
-    constructor(private rigService: RigService, private fb: FormBuilder) {
+    constructor(private rigService: RigService, private fb: FormBuilder, public router: Router) {
         this.validatingForm = this.fb.group({
             'controllerRigName': [null, [Validators.required, Validators.minLength(3)]],
             'controllerRigPassword': [null, [Validators.required, Validators.minLength(3)]],
@@ -56,6 +59,13 @@ export class EditRigComponent implements OnInit {
             },
             err => this.errorMessage = err.json().errorMessage
         );
+    }
+
+    checkCreateNewConfig(value) {
+        if (value == this.CREATE_NEW_CONFIG) {
+            this.editModal.hide();
+            this.router.navigate(['/system/configs'], {});
+        }
     }
 
 }

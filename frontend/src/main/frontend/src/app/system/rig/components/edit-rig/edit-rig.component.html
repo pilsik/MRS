@@ -50,10 +50,12 @@
                     <div class="md-form">
                         <select mdbActive id="editModalForm3" class="form-control form-control-lg"
                                 data-error="Please select config for rig" data-success="OK"
-                                [(ngModel)]="editingRig.minerConfig.id" formControlName="controllerRigConfig">
+                                [(ngModel)]="editingRig.minerConfig.id" formControlName="controllerRigConfig"
+                                (change)="checkCreateNewConfig($event.target.value)">
                             <option *ngFor="let config of configs" [ngValue]="config.id">
                                 {{config.name}}
                             </option>
+                            <option [value]="CREATE_NEW_CONFIG" >Create new config</option>
                         </select>
                         <label for="editModalForm3">Choose config for rig</label>
                     </div>
