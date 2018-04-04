@@ -1,31 +1,42 @@
-<form class="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+<form class="form-signin" [formGroup]="validatingForm">
     <p class="h5 text-center mb-4">Sign in</p>
     <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
 
-    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <!--[ngClass]="{ 'has-error': f.submitted && !username.valid }"-->
+
+    <div class="md-form">
         <i class="fa fa-user prefix grey-text"></i>
-        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username"
-               #username="ngModel" required mdbActive/>
+        <input type="text" class="form-control" name="username" id="username" #username [(ngModel)]="user.username"
+               formControlName="controlUsername" mdbActive
+               [ngClass]="{ 'has-error': validatingForm.controls['controlUsername'].touched.valueOf() && !validatingForm.get('controlUsername').valid.valueOf() }"/>
         <label for="username">Username or Email</label>
-        <div *ngIf="f.submitted && !username.valid" class="help-block">Username/Login is required</div>
+        <div *ngIf="validatingForm.controls['controlUsername'].touched">
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlUsername'].errors?.required">Please enter username
+            </div>
+        </div>
     </div>
 
-    <div class="md-form" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+
+    <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
-        <input type="password" class="form-control" id="password" name="password"
-               [(ngModel)]="user.password"
-               #password="ngModel" required mdbActive/>
-        <label for="password">Your password</label>
-        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password"
+               formControlName="controlPassword" mdbActive
+               [ngClass]="{ 'has-error': validatingForm.controls['controlPassword'].touched.valueOf() && !validatingForm.get('controlPassword').valid.valueOf() }"/>
+        <label for="password">Password</label>
+        <div *ngIf="validatingForm.controls['controlPassword'].touched">
+            <div class="alert alert-danger"
+                 *ngIf="validatingForm.controls['controlPassword'].errors?.required">Please enter password
+            </div>
+        </div>
     </div>
 
-    <div id="remember" class="checkbox"></div>
+    <!--<div id="remember" class="checkbox"></div>-->
 
     <div class="text-center">
         <button class="btn btn-deep-orange waves-light" type="submit">Sign in</button>
         <button type="button" class="btn btn-default waves-light" [routerLink]="['/registration']" mdbRippleRadius>
-            Create new
-            Account!
+            Create new Account!
         </button>
     </div>
 </form>

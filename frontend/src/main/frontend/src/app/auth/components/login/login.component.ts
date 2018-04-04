@@ -1,33 +1,40 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+
 import {User} from "../../../shared/models/user.model";
 import {AuthService} from "../../../shared/services/auth.service";
-import {Router} from "@angular/router";
-
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
-  errorMessage: string;
+    user: User = new User();
+    errorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router) {
-  }
+    validatingForm: FormGroup;
 
-  ngOnInit() {
-  }
+    constructor(private authService: AuthService, private router: Router,  private fb: FormBuilder) {
+        this.validatingForm = this.fb.group({
+            'controlUsername': [null, [Validators.required]],
+            'controlPassword': [null, [Validators.required]],
+        });
+    }
 
-  login() {
-    this.authService.logIn(this.user)
-      .subscribe(() => {
-          this.router.navigate(['/system/rigs']);
-        }, ()  => {
-          this.errorMessage = "error :  Username or password is incorrect";
-        }
-      )
-  }
+    ngOnInit() {
+    }
+
+    login() {
+        this.authService.logIn(this.user)
+            .subscribe(() => {
+                    this.router.navigate(['/system/rigs']);
+                }, () => {
+                    this.errorMessage = "error :  Username or password is incorrect";
+                }
+            )
+    }
 }

@@ -9,3 +9,7 @@
     margin-top: 1.4em;
 
 }
+
+input.has-error {
+    border-bottom: 2px solid red;
+}

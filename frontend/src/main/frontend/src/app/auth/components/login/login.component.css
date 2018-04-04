@@ -3,3 +3,7 @@
     padding: 15px;
     margin: 0 auto;
 }
+
+input.has-error {
+    border-bottom: 2px solid red;
+}

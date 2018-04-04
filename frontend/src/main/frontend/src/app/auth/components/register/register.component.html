@@ -5,7 +5,9 @@
     <div class="md-form">
         <i class="fa fa-user prefix grey-text"></i>
         <i class="fa fa-spinner fa-pulse" [hidden]="!validatingForm.get('controlUsername').pending.valueOf()"></i>
-        <input type="text" class="form-control" name="username" id="username" #username [(ngModel)]="user.username" formControlName="controlUsername" mdbActive/>
+        <input type="text" class="form-control" name="username" id="username" #username [(ngModel)]="user.username"
+               formControlName="controlUsername" mdbActive
+               [ngClass]="{ 'has-error': validatingForm.controls['controlUsername'].touched.valueOf() && !validatingForm.get('controlUsername').valid.valueOf() }"/>
         <label for="username">Username</label>
         <div *ngIf="validatingForm.controls['controlUsername'].touched">
             <div class="alert alert-danger"
@@ -24,7 +26,9 @@
     <div class="md-form">
         <i class="fa fa-envelope prefix grey-text"></i>
         <i class="fa fa-spinner fa-pulse" [hidden]="!validatingForm.get('controlEmail').pending.valueOf()"></i>
-        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" formControlName="controlEmail" mdbActive/>
+        <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email"
+               formControlName="controlEmail" mdbActive
+               [ngClass]="{ 'has-error': validatingForm.controls['controlEmail'].touched.valueOf() && !validatingForm.get('controlEmail').valid.valueOf() }"/>
         <label for="email">Email Address</label>
         <div *ngIf="validatingForm.controls['controlEmail'].touched">
             <div class="alert alert-danger"
@@ -41,7 +45,9 @@
 
     <div class="md-form">
         <i class="fa fa-lock prefix grey-text"></i>
-        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password" formControlName="controlPassword" mdbActive/>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password"
+               formControlName="controlPassword" mdbActive
+               [ngClass]="{ 'has-error': validatingForm.controls['controlPassword'].touched.valueOf() && !validatingForm.get('controlPassword').valid.valueOf() }"/>
         <label for="password">Password</label>
         <div *ngIf="validatingForm.controls['controlPassword'].touched">
             <div class="alert alert-danger"
