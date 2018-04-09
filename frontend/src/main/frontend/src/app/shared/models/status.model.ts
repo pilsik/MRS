@@ -1,3 +1,5 @@
 export class Status {
-  id: string
+  id: string;
+  online: boolean;
+  stats: string;
 }

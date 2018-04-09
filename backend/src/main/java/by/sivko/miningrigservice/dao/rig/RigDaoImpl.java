@@ -16,4 +16,8 @@ public class RigDaoImpl extends GenericDaoImpl<Rig,Long> implements RigDao {
         return deletedRig;
     }
 
+    @Override
+    public void updateRig(Rig rig) {
+        super.entityManager.merge(rig);
+    }
 }

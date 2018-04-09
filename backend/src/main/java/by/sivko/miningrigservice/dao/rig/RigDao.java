@@ -7,4 +7,6 @@ public interface RigDao extends GenericDao<Rig,Long> {
 
     Rig deleteRigById(Long id);
 
+    void updateRig(Rig rig);
+
 }

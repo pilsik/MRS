@@ -35,6 +35,11 @@ public class Status implements Serializable {
     public Status() {
     }
 
+    public Status(Rig rig, String stats) {
+        this.rig = rig;
+        this.stats = stats;
+    }
+
     public Long getId() {
         return id;
     }

@@ -60,7 +60,6 @@ CREATE TABLE "user_and_profile" (
 
 CREATE TABLE "status" (
   "id"          BIGINT PRIMARY KEY DEFAULT "nextval"('"status_seq"'),
-  "miner_id"    BIGINT,
   "rig_id"      BIGINT  NOT NULL,
   "online"      BOOLEAN NOT NULL   DEFAULT 'FALSE',
   "need_reboot" BOOLEAN NOT NULL   DEFAULT 'FALSE',

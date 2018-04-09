@@ -1,6 +1,7 @@
 package by.sivko.miningrigservice.controllers;
 
 import by.sivko.miningrigservice.models.rigs.Rig;
+import by.sivko.miningrigservice.models.status.Status;
 import by.sivko.miningrigservice.services.rig.RigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,13 @@ public class StatusRestController {
 
     @CrossOrigin
     @RequestMapping("/{rigId}")
-    public ResponseEntity<Void> setStatsForRig(@PathVariable long rigId, String password,@RequestBody String stats) {
+    public ResponseEntity<Void> setStatsForRig(@PathVariable long rigId, String password, @RequestBody String stats) {
         Rig rig = this.rigService.getRigById(rigId);
         if (!rig.getPassword().equals(password)) return new ResponseEntity<>(HttpStatus.LOCKED);
-        rig.getStatus().setStats(stats);
+        if (rig.getStatus() == null) rig.setStatus(new Status(rig, stats));
+        else rig.getStatus().setStats(stats);
+        rig.getStatus().setOnline(true);
+        this.rigService.updateRig(rig);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -12,4 +12,5 @@ public interface RigService {
 
     void removeRig(Rig rig);
 
+    void updateRig(Rig rig);
 }

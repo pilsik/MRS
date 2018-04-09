@@ -37,4 +37,9 @@ public class RigServiceImpl implements RigService {
     public void removeRig(Rig rig) {
         this.rigDao.remove(rig);
     }
+
+    @Override
+    public void updateRig(Rig rig) {
+        this.rigDao.updateRig(rig);
+    }
 }
