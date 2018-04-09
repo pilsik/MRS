@@ -31,10 +31,8 @@
         </div>
     </div>
 
-    <!--<div id="remember" class="checkbox"></div>-->
-
     <div class="text-center">
-        <button class="btn btn-deep-orange waves-light" type="submit">Sign in</button>
+        <button class="btn btn-deep-orange waves-light" type="submit" (click)="login()">Sign in</button>
         <button type="button" class="btn btn-default waves-light" [routerLink]="['/registration']" mdbRippleRadius>
             Create new Account!
         </button>

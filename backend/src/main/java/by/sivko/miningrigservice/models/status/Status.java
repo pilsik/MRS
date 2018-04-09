@@ -1,12 +1,10 @@
 package by.sivko.miningrigservice.models.status;
 
 import by.sivko.miningrigservice.models.rigs.Rig;
-import by.sivko.miningrigservice.models.videocards.VideoCard;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "status")
@@ -28,10 +26,17 @@ public class Status implements Serializable {
     @Column
     private boolean needReboot = false;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "status", cascade = CascadeType.ALL)
-    private List<VideoCard> cardList;
+    @Column
+    private String stats;
+
+   /* @OneToMany(fetch = FetchType.EAGER, mappedBy = "status", cascade = CascadeType.ALL)
+    private List<VideoCard> cardList;*/
 
     public Status() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Rig getRig() {
@@ -58,12 +63,20 @@ public class Status implements Serializable {
         this.needReboot = needReboot;
     }
 
-    public List<VideoCard> getCardList() {
+    public String getStats() {
+        return stats;
+    }
+
+    public void setStats(String stats) {
+        this.stats = stats;
+    }
+
+    /*  public List<VideoCard> getCardList() {
         return cardList;
     }
 
     public void setCardList(List<VideoCard> cardList) {
         this.cardList = cardList;
-    }
+    }*/
 
 }
